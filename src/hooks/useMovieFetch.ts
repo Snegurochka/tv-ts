@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
 import API from "../API";
+import { isPersistedState } from "../helpers";
 import { MovieState } from "../types";
 
-export const useMovieFetch = (movieId:string) => {
+export const useMovieFetch = (movieId: string) => {
     const [state, setState] = useState<MovieState>({} as MovieState);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
@@ -17,7 +18,7 @@ export const useMovieFetch = (movieId:string) => {
 
             //Get directors only
             const directors = credits.crew.filter(
-                (member:any) => member.job === 'Director'
+                (member: any) => member.job === 'Director'
             );
 
             setState({
@@ -33,8 +34,20 @@ export const useMovieFetch = (movieId:string) => {
     }, [movieId]);
 
     useEffect(() => {
+        const sessionState = isPersistedState(movieId);
+        if (sessionState) {
+            setState(sessionState);
+            setLoading(false);
+            return;
+        }
+
         fetchData();
     }, [movieId, fetchData]);
+
+    // Write to sessionStorage
+    useEffect(()=>{
+        sessionStorage.setItem(movieId, JSON.stringify(state));
+    },[movieId, state]);
 
     return { state, loading, error };
 }

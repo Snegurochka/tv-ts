@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
+// APT
 import API from "../API";
-
-import {MoviType} from "../types";
+// Helpers
+import { isPersistedState } from "../helpers";
+//Types
+import { MoviType } from "../types";
 
 type initialStateType = {
     page: number
@@ -10,7 +13,7 @@ type initialStateType = {
     total_results: number
 }
 
-const initialState:initialStateType = {
+const initialState: initialStateType = {
     page: 0,
     results: [],
     total_pages: 0,
@@ -46,6 +49,14 @@ export const useHomeFetch = () => {
 
     // initial and search
     useEffect(() => {
+        if (!searchTerm) {
+            const sessionState = isPersistedState('homeState');
+
+            if (sessionState) {
+                setState(sessionState);
+                return;
+            }
+        }
         fetchMovies(1, searchTerm);
     }, [searchTerm]);
 
@@ -57,6 +68,11 @@ export const useHomeFetch = () => {
 
         setIsLoadingMore(false);
     }, [isLoadingMore, state.page, searchTerm]);
+
+    //Set SessionStorage
+    useEffect(()=>{
+        if (!searchTerm) sessionStorage.setItem('homeState', JSON.stringify(state))
+    }, [searchTerm, state])
 
     return { state, loading, error, searchTerm, setSearchTerm, setIsLoadingMore }
 }
