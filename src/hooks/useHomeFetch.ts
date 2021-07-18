@@ -1,0 +1,62 @@
+import { useEffect, useState } from "react";
+import API from "../API";
+
+import {MoviType} from "../types";
+
+type initialStateType = {
+    page: number
+    results: Array<MoviType>
+    total_pages: number
+    total_results: number
+}
+
+const initialState:initialStateType = {
+    page: 0,
+    results: [],
+    total_pages: 0,
+    total_results: 0,
+}
+
+export const useHomeFetch = () => {
+    const [searchTerm, setSearchTerm] = useState('');
+    const [state, setState] = useState(initialState);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
+    const [isLoadingMore, setIsLoadingMore] = useState(false);
+
+    const fetchMovies = async (page = 1, searchTerm = "") => {
+        try {
+            setError(false);
+            setLoading(true);
+
+            const movies = await API.fetchMovies(searchTerm, page);
+
+            setState((prev) => ({
+                ...movies,
+                results:
+                    page > 1 ? [...prev.results, ...movies.results] : [...movies.results]
+            }));
+            console.log(movies);
+
+        } catch (e) {
+            setError(true);
+        }
+        setLoading(false);
+    }
+
+    // initial and search
+    useEffect(() => {
+        fetchMovies(1, searchTerm);
+    }, [searchTerm]);
+
+    // loading more
+    useEffect(() => {
+        if (!isLoadingMore) return;
+
+        fetchMovies(state.page + 1, searchTerm);
+
+        setIsLoadingMore(false);
+    }, [isLoadingMore, state.page, searchTerm]);
+
+    return { state, loading, error, searchTerm, setSearchTerm, setIsLoadingMore }
+}
