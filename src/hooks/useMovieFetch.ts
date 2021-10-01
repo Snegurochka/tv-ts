@@ -15,14 +15,16 @@ export const useMovieFetch = (movieId: string) => {
 
             const movie = await API.fetchMovie(movieId);
             const credits = await API.fetchCredits(movieId);
+            const photos = await API.fetchPhotos(movieId);
 
             //Get directors only
             const directors = credits.crew.filter(
-                (member: any) => member.job === 'Director'
+                (member) => member.job === 'Director'
             );
 
             setState({
                 ...movie,
+                backdrops: photos.backdrops,
                 actors: credits.cast,
                 directors
             });
@@ -45,9 +47,9 @@ export const useMovieFetch = (movieId: string) => {
     }, [movieId, fetchData]);
 
     // Write to sessionStorage
-    useEffect(()=>{
+    useEffect(() => {
         sessionStorage.setItem(movieId, JSON.stringify(state));
-    },[movieId, state]);
+    }, [movieId, state]);
 
     return { state, loading, error };
 }

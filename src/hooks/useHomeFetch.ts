@@ -4,16 +4,9 @@ import API from "../API";
 // Helpers
 import { isPersistedState } from "../helpers";
 //Types
-import { MoviType } from "../types";
+import { MoviesStateType } from "../types";
 
-type initialStateType = {
-    page: number
-    results: Array<MoviType>
-    total_pages: number
-    total_results: number
-}
-
-const initialState: initialStateType = {
+const initialState: MoviesStateType = {
     page: 0,
     results: [],
     total_pages: 0,
