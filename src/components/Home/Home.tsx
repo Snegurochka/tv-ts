@@ -11,18 +11,17 @@ import Grid from '../Grid/Grid';
 import Spinner from "../Spinner/Spinner";
 import SearchBar from "../SearchBar/SearchBar";
 import Button from "../Button/Button";
+import Error from "../Error/Error";
 
 // Hook
 import { useHomeFetch } from '../../hooks/useHomeFetch';
-
-
 
 
 const Home: React.FC = () => {
     const { state, loading, error, searchTerm, setSearchTerm, setIsLoadingMore } = useHomeFetch();
 
     if (error) {
-        return <div>Something went wrong ...</div>
+        return <Error />
     }
 
     return (

@@ -34,13 +34,14 @@ const MovieInfo: React.FC<PropsType> = ({ movie }) => {
                             <h3>Rating</h3>
                             <div className="score">{movie.vote_average}</div>
                         </div>
+                        {movie.directors ? (
+                            <div className="director">
+                                <h3>Director{movie.directors.length > 1 ? 's' : ''}</h3>
+                                {movie.directors.map(director => (
+                                    <p key={director.credit_id}>{director.name}</p>
+                                ))}
+                            </div>) : null}
 
-                        <div className="director">
-                            <h3>Director{movie.directors.length > 1 ? 's' : ''}</h3>
-                            {movie.directors.map(director => (
-                                <p key={director.credit_id}>{director.name}</p>
-                            ))}
-                        </div>
                     </div>
                 </Text>
             </Content>

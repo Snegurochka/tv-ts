@@ -2,7 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { Wrapper, Content } from "./SearchBar.styles";
 
 type PropsType = {
-    setSearchTerm: (state: string) => void
+    //setSearchTerm: (state: string) => void
+    setSearchTerm: React.Dispatch<React.SetStateAction<string>>
 }
 
 const SearchBar: React.FC<PropsType> = ({ setSearchTerm }) => {

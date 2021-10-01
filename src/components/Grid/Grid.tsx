@@ -4,7 +4,6 @@ import { Wrapper, Content } from "./Grid.styles";
 
 type PropsType = {
     header: string,
-    children: any
 }
 
 const Grid: React.FC<PropsType> = ({ header, children }) => {

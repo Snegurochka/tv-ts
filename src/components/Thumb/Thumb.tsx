@@ -16,7 +16,7 @@ const Thumb: React.FC<ThumbProps> = ({ image, moveId, clickable }) => (
                     <Image src={image} alt='movie-thumb' />
                 </Link>
             )
-            : <Image src={image} alt='movie-thumb' />}
+            : <Image data-testid="thumbnail" src={image} alt='movie-thumb' />}
 
     </div>
 )
