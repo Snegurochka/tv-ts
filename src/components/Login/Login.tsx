@@ -22,21 +22,28 @@ const Login: React.FC<PropsType> = () => {
 
     return (
         <Wrapper>
+            <h2>Log in to your account</h2>
             {error && <div className='error'>There was an error!</div>}
-            <label>Username:</label>
-            <input
-                type='text'
-                value={username}
-                name='username'
-                onChange={(evt) => { setUsername(evt.currentTarget.value) }}
-            />
-            <input
-                type='password'
-                value={password}
-                name='password'
-                onChange={(evt) => { setPassword(evt.currentTarget.value) }}
-            />
-            <Button text='Login' callback={handleSubmit} />
+            <form action="#" method="post">
+                <label><span>Email address</span>
+                    <input
+                        type='text'
+                        value={username}
+                        name='username'
+                        placeholder="example@example.com"
+                        onChange={(evt) => { setUsername(evt.currentTarget.value) }}
+                    />
+                </label>
+                <label><span>Password</span>
+                    <input
+                        type='password'
+                        value={password}
+                        name='password'
+                        onChange={(evt) => { setPassword(evt.currentTarget.value) }}
+                    />
+                </label>
+                <Button text='Login' callback={handleSubmit} />
+            </form>
         </Wrapper>
     )
 }
