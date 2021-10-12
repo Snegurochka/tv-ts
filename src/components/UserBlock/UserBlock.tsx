@@ -13,7 +13,7 @@ const UserBlock: React.FC<PropsType> = () => {
         <Wrapper>
             <Link to='/login' >
             <Avatar>
-                <img src={AvatarImg} alt="User avatar" width="63" height="63" />
+                <img src={AvatarImg} alt="User avatar" width="50" height="50" />
                 <span>Sign In</span>
             </Avatar>
             </Link>

@@ -9,7 +9,7 @@ const Header: React.FC = () => (
     <Wrapper>
         <Content>
             <Link to='/'>
-                <img src={logo} alt="logo" />
+                <img src={logo} alt="logo" width="160" />
             </Link>
 
             <UserBlock />
