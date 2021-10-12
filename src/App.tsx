@@ -22,7 +22,7 @@ const App: React.FC = () => (
       <Route path='/*' component={NotFound} />
       <PrivateRoute
         exact
-        path='/mylist'
+        path='/watchlist'
         authorizationStatus={AuthorizationStatus.NoAuth}
         render={() => <Login/>}
       >
