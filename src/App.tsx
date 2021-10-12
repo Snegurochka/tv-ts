@@ -18,8 +18,6 @@ const App: React.FC = () => (
     <Switch>
       <Route path='/' exact component={Home} />
       <Route path='/login' exact component={Login} />
-      <Route path='/:movieId' component={Movie} />
-      <Route path='/*' component={NotFound} />
       <PrivateRoute
         exact
         path='/watchlist'
@@ -27,6 +25,8 @@ const App: React.FC = () => (
         render={() => <Login/>}
       >
       </PrivateRoute>
+      <Route path='/:movieId' component={Movie} />
+      <Route path='/*' component={NotFound} />
     </Switch>
 
     <GlobalStyle />
