@@ -8,14 +8,14 @@ import {
   SESSION_ID_URL,
 } from './config';
 
+import { Credits, ISessionId, MoviesStateType, MoviType, Photos } from './types';
+
 const defaultConfig = {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json'
   }
 };
-
-import { Credits, MoviesStateType, MoviType, Photos } from './types';
 
 const API = {
   fetchMovies: async (searchTerm: string, page: number): Promise<MoviesStateType> => {
@@ -36,7 +36,7 @@ const API = {
     const creditsEndpoint = `${API_URL}movie/${movieId}/images?api_key=${API_KEY}`;
     return await (await fetch(creditsEndpoint)).json();
   },
-  getRequestToken: async () => {
+  getRequestToken: async ()  => {
     const reqToken = await (await fetch(REQUEST_TOKEN_URL)).json();
     return reqToken.request_token;
   },
@@ -44,7 +44,7 @@ const API = {
     requestToken: string,
     username: string,
     password: string
-  ) => {
+  ): Promise<ISessionId> => {
     const bodyData = {
       username,
       password,
@@ -58,15 +58,13 @@ const API = {
       })
     ).json();
     // Then get the sessionId with the requestToken
-    if (data.success) {
-      const sessionId = await (
-        await fetch(SESSION_ID_URL, {
-          ...defaultConfig,
-          body: JSON.stringify({ request_token: requestToken })
-        })
-      ).json();
-      return sessionId;
-    }
+    const sessionId = await (
+      await fetch(SESSION_ID_URL, {
+        ...defaultConfig,
+        body: JSON.stringify({ request_token: requestToken })
+      })
+    ).json();
+    return sessionId;
   }
 };
 

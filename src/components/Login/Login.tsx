@@ -1,7 +1,12 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import {setLogin} from "./../../store/AC/auth";
 import API from "../../API";
-import Button from "../Button/Button";
+
 import { Wrapper } from "./Login.styles";
+
+// Components
+import Button from "../Button/Button";
 
 
 type PropsType = {}
@@ -11,11 +16,19 @@ const Login: React.FC<PropsType> = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false);
 
+    const dispatch = useDispatch();
+
     const handleSubmit = async () => {
         setError(false);
 
         try {
             const requestToken = await API.getRequestToken();
+            const sessionId = await API.authenticate(
+                requestToken,
+                username,
+                password
+            );
+            dispatch(setLogin({sessionId : sessionId.session_id, username}));
         } catch (error) {
             setError(true);
         }

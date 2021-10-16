@@ -1,3 +1,7 @@
+export interface ISessionId {
+    session_id: string
+}
+
 export type MoviType = {
     id: number,
     backdrop_path: string,
@@ -25,7 +29,7 @@ export type ActorType = {
     profile_path: string,
 }
 
-export type MovieState = MoviType & { actors: ActorType[]; directors: DirectorType[];  };
+export type MovieState = MoviType & { actors: ActorType[]; directors: DirectorType[]; };
 
 export type MoviesStateType = {
     page: number,
