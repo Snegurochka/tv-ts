@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import API from "../../API";
 import Button from "../Button/Button";
 import { Wrapper } from "./Login.styles";
 
@@ -14,7 +15,7 @@ const Login: React.FC<PropsType> = () => {
         setError(false);
 
         try {
-
+            const requestToken = await API.getRequestToken();
         } catch (error) {
             setError(true);
         }
