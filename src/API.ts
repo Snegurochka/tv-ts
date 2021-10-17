@@ -42,7 +42,7 @@ const API = {
     return reqToken.request_token;
   },
   fetchUserInfo: async (sessionId: string): Promise<IUserInfoAPIResponse> => {
-    const userInfo = `${API_URL}account/?api_key=${API_KEY}&session_id=${sessionId}`;
+    const userInfo = `${API_URL}account?api_key=${API_KEY}&session_id=${sessionId}`;
     return await (await fetch(userInfo)).json();
   },
   authenticate: async (

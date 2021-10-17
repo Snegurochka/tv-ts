@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    
     a {
         cursor:pointer;
         display: flex;

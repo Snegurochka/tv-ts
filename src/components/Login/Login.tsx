@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import {setLogin} from "./../../store/AC/auth";
+import { setLogin, setGravatar } from "./../../store/AC/auth";
 import API from "../../API";
 
 import { Wrapper } from "./Login.styles";
@@ -28,8 +28,10 @@ const Login: React.FC<PropsType> = () => {
                 username,
                 password
             );
-            dispatch(setLogin({sessionId : sessionId.session_id, username}));
+            dispatch(setLogin({ sessionId: sessionId.session_id, username }));
             const userInfo = await API.fetchUserInfo(sessionId.session_id);
+            dispatch(setGravatar(userInfo.avatar.gravatar.hash));
+
         } catch (error) {
             setError(true);
         }
