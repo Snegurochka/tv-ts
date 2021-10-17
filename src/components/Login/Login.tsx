@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setLogin, setGravatar } from "./../../store/AC/auth";
 import API from "../../API";
+import { useHistory } from "react-router";
 
 import { Wrapper } from "./Login.styles";
 
@@ -17,6 +18,7 @@ const Login: React.FC<PropsType> = () => {
     const [error, setError] = useState(false);
 
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const handleSubmit = async () => {
         setError(false);
@@ -31,7 +33,7 @@ const Login: React.FC<PropsType> = () => {
             dispatch(setLogin({ sessionId: sessionId.session_id, username }));
             const userInfo = await API.fetchUserInfo(sessionId.session_id);
             dispatch(setGravatar(userInfo.avatar.gravatar.hash));
-
+            history.push('/');
         } catch (error) {
             setError(true);
         }

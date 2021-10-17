@@ -6,13 +6,21 @@ import {
   REQUEST_TOKEN_URL,
   LOGIN_URL,
   SESSION_ID_URL,
+  LOGOUT_URL,
 } from './config';
 
 import { Credits, MoviesStateType, MoviType, Photos } from './types';
 import { ISessionId, IUserInfoAPIResponse } from './interfaces/APIInterfases';
 
-const defaultConfig = {
+const defaultPOSTConfig = {
   method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  }
+};
+
+const defaultDELETEConfig = {
+  method: 'DELETE',
   headers: {
     'Content-Type': 'application/json'
   }
@@ -56,20 +64,29 @@ const API = {
       request_token: requestToken
     };
     // First authenticate the requestToken
-    const data = await (
+    await (
       await fetch(LOGIN_URL, {
-        ...defaultConfig,
+        ...defaultPOSTConfig,
         body: JSON.stringify(bodyData)
       })
     ).json();
     // Then get the sessionId with the requestToken
     const sessionId = await (
       await fetch(SESSION_ID_URL, {
-        ...defaultConfig,
+        ...defaultPOSTConfig,
         body: JSON.stringify({ request_token: requestToken })
       })
     ).json();
     return sessionId;
+  },
+  logout: async (sessionId: string): Promise<boolean> => {
+    const data = await (
+      await fetch(LOGOUT_URL, {
+        ...defaultDELETEConfig,
+        body: JSON.stringify({ session_id: sessionId })
+      })
+    ).json();
+    return data.success;
   }
 };
 
