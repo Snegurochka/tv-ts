@@ -25,7 +25,7 @@ export type ActorType = {
     profile_path: string,
 }
 
-export type MovieState = MoviType & { actors: ActorType[]; directors: DirectorType[];  };
+export type MovieState = MoviType & { actors: ActorType[]; directors: DirectorType[]; };
 
 export type MoviesStateType = {
     page: number,

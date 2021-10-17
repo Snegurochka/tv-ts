@@ -1,6 +1,13 @@
 import React, { useState } from "react";
-import Button from "../Button/Button";
+import { useDispatch } from "react-redux";
+import { setLogin, setGravatar } from "./../../store/AC/auth";
+import API from "../../API";
+import { useHistory } from "react-router";
+
 import { Wrapper } from "./Login.styles";
+
+// Components
+import Button from "../Button/Button";
 
 
 type PropsType = {}
@@ -10,11 +17,23 @@ const Login: React.FC<PropsType> = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false);
 
+    const dispatch = useDispatch();
+    const history = useHistory();
+
     const handleSubmit = async () => {
         setError(false);
 
         try {
-
+            const requestToken = await API.getRequestToken();
+            const sessionId = await API.authenticate(
+                requestToken,
+                username,
+                password
+            );
+            dispatch(setLogin({ sessionId: sessionId.session_id, username }));
+            const userInfo = await API.fetchUserInfo(sessionId.session_id);
+            dispatch(setGravatar(userInfo.avatar.gravatar.hash));
+            history.push('/');
         } catch (error) {
             setError(true);
         }
