@@ -1,7 +1,3 @@
-export interface ISessionId {
-    session_id: string
-}
-
 export type MoviType = {
     id: number,
     backdrop_path: string,

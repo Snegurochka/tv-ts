@@ -8,7 +8,8 @@ import {
   SESSION_ID_URL,
 } from './config';
 
-import { Credits, ISessionId, MoviesStateType, MoviType, Photos } from './types';
+import { Credits, MoviesStateType, MoviType, Photos } from './types';
+import { ISessionId, IUserInfoAPIResponse } from './interfaces/APIInterfases';
 
 const defaultConfig = {
   method: 'POST',
@@ -36,12 +37,13 @@ const API = {
     const creditsEndpoint = `${API_URL}movie/${movieId}/images?api_key=${API_KEY}`;
     return await (await fetch(creditsEndpoint)).json();
   },
-  getRequestToken: async ()  => {
+  getRequestToken: async () => {
     const reqToken = await (await fetch(REQUEST_TOKEN_URL)).json();
     return reqToken.request_token;
   },
-  fetchUserInfo: async (sessionId: string) => {
-
+  fetchUserInfo: async (sessionId: string): Promise<IUserInfoAPIResponse> => {
+    const userInfo = `${API_URL}account/?api_key=${API_KEY}&session_id=${sessionId}`;
+    return await (await fetch(userInfo)).json();
   },
   authenticate: async (
     requestToken: string,
