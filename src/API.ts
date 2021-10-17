@@ -40,6 +40,9 @@ const API = {
     const reqToken = await (await fetch(REQUEST_TOKEN_URL)).json();
     return reqToken.request_token;
   },
+  fetchUserInfo: async (sessionId: string) => {
+
+  },
   authenticate: async (
     requestToken: string,
     username: string,

@@ -29,6 +29,7 @@ const Login: React.FC<PropsType> = () => {
                 password
             );
             dispatch(setLogin({sessionId : sessionId.session_id, username}));
+            const avatar = await API.fetchUserInfo(sessionId.session_id);
         } catch (error) {
             setError(true);
         }
