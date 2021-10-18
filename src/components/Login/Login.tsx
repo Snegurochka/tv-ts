@@ -8,6 +8,7 @@ import { Wrapper } from "./Login.styles";
 
 // Components
 import Button from "../Button/Button";
+import { AppRoute } from "../../const";
 
 
 type PropsType = {}
@@ -33,7 +34,7 @@ const Login: React.FC<PropsType> = () => {
             dispatch(setLogin({ sessionId: sessionId.session_id, username }));
             const userInfo = await API.fetchUserInfo(sessionId.session_id);
             dispatch(setGravatar(userInfo.avatar.gravatar.hash));
-            history.push('/');
+            history.push(AppRoute.HOME);
         } catch (error) {
             setError(true);
         }

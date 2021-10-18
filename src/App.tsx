@@ -5,7 +5,7 @@ import store from './store/store';
 
 // Styles and const
 import { GlobalStyle } from './GlobalStyle';
-import { AuthorizationStatus } from './const';
+import { AppRoute, AuthorizationStatus } from './const';
 
 // Components
 import Header from './components/Header/Header';
@@ -21,11 +21,11 @@ const App: React.FC = () => (
     <BrowserRouter>
       <Header />
       <Switch>
-        <Route path='/' exact component={Home} />
-        <Route path='/login' exact component={Login} />
+        <Route path={AppRoute.HOME} exact component={Home} />
+        <Route path={AppRoute.LOGIN} exact component={Login} />
         <PrivateRoute
           exact
-          path='/watchlist'
+          path={AppRoute.LOGIN}
           authorizationStatus={AuthorizationStatus.NoAuth}
           render={() => <Login />}
         >
