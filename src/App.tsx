@@ -14,6 +14,7 @@ import Movie from './components/Movie/Movie';
 import NotFound from './components/NotFound/NotFound';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import Login from './components/Login/Login';
+import Catalog from './components/Catalog/Catalog';
 
 
 const App: React.FC = () => (
@@ -30,6 +31,10 @@ const App: React.FC = () => (
           render={() => <Login />}
         >
         </PrivateRoute>
+        <Route
+                path={AppRoute.CATALOG}
+                component={Catalog}
+            />
         <Route path='/:movieId' component={Movie} />
         <Route path='/*' component={NotFound} />
       </Switch>

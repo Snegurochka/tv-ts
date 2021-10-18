@@ -2,8 +2,9 @@ export enum AppRoute {
     HOME = '/',
     LOGIN = '/login',
     WATCH_LIST = '/watchlist',
-    MOVIES = '/movie',
-    TV = '/tv',
+    CATALOG = '/catalog/:category',
+    MOVIES = '/catalog/movie',
+    TV = '/catalog/tv',
     ADD_REVIEW = '/review',
 };
 
