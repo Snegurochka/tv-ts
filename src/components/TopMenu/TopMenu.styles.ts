@@ -2,11 +2,11 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.nav`
     display: flex;
-    gap: 20px;
+    gap: 24px;
 
     a {
         display: flex;
-        gap: 4px;
+        gap: 8px;
         align-items: center;
         color: var(--white);
         text-decoration: none;
