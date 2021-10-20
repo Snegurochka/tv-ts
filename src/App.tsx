@@ -5,7 +5,7 @@ import store from './store/store';
 
 // Styles and const
 import { GlobalStyle } from './GlobalStyle';
-import { AuthorizationStatus } from './const';
+import { AppRoute, AuthorizationStatus } from './const';
 
 // Components
 import Header from './components/Header/Header';
@@ -14,6 +14,7 @@ import Movie from './components/Movie/Movie';
 import NotFound from './components/NotFound/NotFound';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import Login from './components/Login/Login';
+import Catalog from './components/Catalog/Catalog';
 
 
 const App: React.FC = () => (
@@ -21,15 +22,19 @@ const App: React.FC = () => (
     <BrowserRouter>
       <Header />
       <Switch>
-        <Route path='/' exact component={Home} />
-        <Route path='/login' exact component={Login} />
+        <Route path={AppRoute.HOME} exact component={Home} />
+        <Route path={AppRoute.LOGIN} exact component={Login} />
         <PrivateRoute
           exact
-          path='/watchlist'
+          path={AppRoute.LOGIN}
           authorizationStatus={AuthorizationStatus.NoAuth}
           render={() => <Login />}
         >
         </PrivateRoute>
+        <Route
+                path={AppRoute.CATALOG}
+                component={Catalog}
+            />
         <Route path='/:movieId' component={Movie} />
         <Route path='/*' component={NotFound} />
       </Switch>

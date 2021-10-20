@@ -7,11 +7,12 @@ import logo from '../../img/logo_kino_list.png';
 // Components
 import UserBlock from '../UserBlock/UserBlock';
 import TopMenu from '../TopMenu/TopMenu';
+import { AppRoute } from '../../const';
 
 const Header: React.FC = () => (
     <Wrapper>
         <Content>
-            <Link to='/'>
+            <Link to={AppRoute.HOME}>
                 <img src={logo} alt="logo" width="160" />
             </Link>
             <TopMenu />

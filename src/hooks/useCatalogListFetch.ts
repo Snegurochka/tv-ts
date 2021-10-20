@@ -13,7 +13,7 @@ const initialState: MoviesStateType = {
     total_results: 0,
 }
 
-export const useHomeFetch = () => {
+export const useCatalogListFetch = (type: string) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [state, setState] = useState(initialState);
     const [loading, setLoading] = useState(false);
@@ -25,7 +25,7 @@ export const useHomeFetch = () => {
             setError(false);
             setLoading(true);
 
-            const movies = await API.fetchMovies(searchTerm, page);
+            const movies = await API.fetchMovies(type, searchTerm, page);
 
             setState((prev) => ({
                 ...movies,
@@ -41,7 +41,8 @@ export const useHomeFetch = () => {
     // initial and search
     useEffect(() => {
         if (!searchTerm) {
-            const sessionState = isPersistedState('homeState');
+            const stateType = `${type}State`;
+            const sessionState = isPersistedState(stateType);
 
             if (sessionState) {
                 setState(sessionState);
@@ -49,7 +50,7 @@ export const useHomeFetch = () => {
             }
         }
         fetchMovies(1, searchTerm);
-    }, [searchTerm]);
+    }, [searchTerm, type]);
 
     // loading more
     useEffect(() => {
@@ -62,8 +63,11 @@ export const useHomeFetch = () => {
 
     //Set SessionStorage
     useEffect(()=>{
-        if (!searchTerm) sessionStorage.setItem('homeState', JSON.stringify(state))
-    }, [searchTerm, state])
+        if (!searchTerm) {
+            const stateType = `${type}State`;
+            sessionStorage.setItem(stateType, JSON.stringify(state));
+        }
+    }, [searchTerm, state, type])
 
     return { state, loading, error, searchTerm, setSearchTerm, setIsLoadingMore }
 }
