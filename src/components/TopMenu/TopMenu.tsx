@@ -3,6 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 
 import { Wrapper } from "./TopMenu.styles";
 import homeIcon from '../../img/home-icon.svg';
+import movieIcon from '../../img/movie-icon.svg';
+import tvIcon from '../../img/tv-icon.svg';
 import watchlistIcon from '../../img/watchlist-icon.svg';
 import { AppRoute } from "../../const";
 
@@ -17,22 +19,21 @@ const menu = [
     {
         title: 'Movies',
         path: AppRoute.MOVIES,
-        icon: homeIcon,
+        icon: movieIcon,
     },
     {
         title: 'TV Series',
         path: AppRoute.TV,
-        icon: homeIcon,
+        icon: tvIcon,
     },
-    {
-        title: 'WatchList',
-        path: AppRoute.WATCH_LIST,
-        icon: watchlistIcon,
-    },
+    // {
+    //     title: 'WatchList',
+    //     path: AppRoute.WATCH_LIST,
+    //     icon: watchlistIcon,
+    // },
 ]
 
 const TopMenu: React.FC<PropsType> = () => {
-
     const { pathname } = useLocation();
 
     return (

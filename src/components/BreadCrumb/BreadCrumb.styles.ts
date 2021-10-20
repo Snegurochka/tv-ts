@@ -8,6 +8,11 @@ export const Wrapper = styled.div`
   height: 70px;
   background: var(--medGrey);
   color: var(--white);
+
+  @media screen and (max-width: 680px) {
+    height: 40px;
+  }
+
 `;
 
 export const Content = styled.div`

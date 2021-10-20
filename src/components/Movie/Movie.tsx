@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
+// Hook
 import { useMovieFetch } from '../../hooks/useMovieFetch';
-
 
 // Components
 import Spinner from "../Spinner/Spinner";
@@ -11,7 +11,9 @@ import MovieInfoBar from "../MovieInfoBar/MovieInfoBar";
 import Gallery from '../Gallery/Gallery';
 import ActorsList from '../ActorsList/ActorsList';
 
-// Hook
+import { Wrapper } from './Movie.styles';
+
+
 
 const Movie: React.FC = () => {
     const { movieId } = useParams<{movieId: string}>();
@@ -22,7 +24,7 @@ const Movie: React.FC = () => {
    
 
     return (
-        <>
+        <Wrapper>
         <BreadCrumb movieTitle={movie.original_title} />
 
         <MovieInfo movie={movie} />
@@ -32,7 +34,7 @@ const Movie: React.FC = () => {
         {movie.backdrops ? (<Gallery header='Photos' photos={movie.backdrops}/>) : null}
 
         {movie.actors ? (<ActorsList actors={movie.actors} />) : null}
-        </>
+        </Wrapper>
     )
 }
 

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-    margin: 48px auto;
+    margin: 140px auto;
     max-width: 28rem;
 
     form {
@@ -17,5 +17,9 @@ export const Wrapper = styled.div`
         margin-top: .25rem;
         border-radius: 1rem;
         border: 1px solid var(--medGrey);
+    }
+
+    @media screen and (max-width: 680px) {
+        max-width: 20rem;
     }
 `;

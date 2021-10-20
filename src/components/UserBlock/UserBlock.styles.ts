@@ -28,6 +28,11 @@ export const Wrapper = styled.div`
 
 export const Avatar = styled.img`
     border-radius:50%;
+
+    @media screen and (max-width: 680px) {
+        max-width: 25px;
+        max-height: 25px;
+      }
 `;
 
 export const LogoutLink = styled.span`

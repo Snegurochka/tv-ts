@@ -1,5 +1,6 @@
 import React from "react";
 
+import { Wrapper } from "./Home.styles";
 import NoImage from '../../img/no_image.jpg';
 
 import { BACKDROP_SIZE, IMAGE_BASE_URL } from '../../config';
@@ -17,6 +18,7 @@ import Error from "../Error/Error";
 import { useCatalogListFetch } from '../../hooks/useCatalogListFetch';
 
 
+
 const Home: React.FC = () => {
     const { state, loading, error, searchTerm, setSearchTerm, setIsLoadingMore } = useCatalogListFetch('movie');
 
@@ -25,7 +27,7 @@ const Home: React.FC = () => {
     }
 
     return (
-        <>
+        <Wrapper>
             {!searchTerm && state.results[0]
                 ? <BigBanner
                     image={`${IMAGE_BASE_URL}${BACKDROP_SIZE}${state.results[0].backdrop_path}`}
@@ -52,7 +54,7 @@ const Home: React.FC = () => {
             {state.page < state.total_pages && !loading && (
                 <Button text='Load More' callback={() => setIsLoadingMore(true)} />
             )}
-        </>
+        </Wrapper>
     )
 }
 

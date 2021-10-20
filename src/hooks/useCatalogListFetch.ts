@@ -50,7 +50,7 @@ export const useCatalogListFetch = (type: string) => {
             }
         }
         fetchMovies(1, searchTerm);
-    }, [searchTerm, type]);
+    }, [searchTerm, type]); // eslint-disable-line react-hooks/exhaustive-deps
 
     // loading more
     useEffect(() => {
@@ -59,7 +59,7 @@ export const useCatalogListFetch = (type: string) => {
         fetchMovies(state.page + 1, searchTerm);
 
         setIsLoadingMore(false);
-    }, [isLoadingMore, state.page, searchTerm]);
+    }, [isLoadingMore, state.page, searchTerm]); // eslint-disable-line react-hooks/exhaustive-deps
 
     //Set SessionStorage
     useEffect(()=>{
