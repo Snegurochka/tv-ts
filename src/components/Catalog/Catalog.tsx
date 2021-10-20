@@ -10,11 +10,14 @@ import { BACKDROP_SIZE, IMAGE_BASE_URL } from '../../config';
 import Grid from "../Grid/Grid";
 import Thumb from "../Thumb/Thumb";
 import Error from "../Error/Error";
+import SearchBar from "../SearchBar/SearchBar";
+import { Spinner } from "../Spinner/Spinner.styles";
+import Button from "../Button/Button";
 
 const Catalog: React.FC = () => {
     const { category } = useParams<{category: string}>();
 
-    const { state, loading, error, searchTerm, setSearchTerm, setIsLoadingMore } = useCatalogListFetch(category);
+    const { state, loading, error, setSearchTerm, setIsLoadingMore } = useCatalogListFetch(category);
 
     if (error) {
         return <Error />
@@ -22,6 +25,7 @@ const Catalog: React.FC = () => {
 
     return (
         <>
+            <SearchBar setSearchTerm={setSearchTerm} />
             <Grid header={category === 'movie' ? 'Movies' : 'TV Series'}>
             {state.results.map((movie) => (
                     <Thumb
@@ -35,6 +39,10 @@ const Catalog: React.FC = () => {
                         clickable={true} />
                 ))}
             </Grid>
+            {loading && <Spinner />}
+            {state.page < state.total_pages && !loading && (
+                <Button text='Load More' callback={() => setIsLoadingMore(true)} />
+            )}
         </>
     )
 }
