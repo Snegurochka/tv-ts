@@ -14,11 +14,11 @@ import Button from "../Button/Button";
 import Error from "../Error/Error";
 
 // Hook
-import { useHomeFetch } from '../../hooks/useHomeFetch';
+import { useCatalogListFetch } from '../../hooks/useCatalogListFetch';
 
 
 const Home: React.FC = () => {
-    const { state, loading, error, searchTerm, setSearchTerm, setIsLoadingMore } = useHomeFetch();
+    const { state, loading, error, searchTerm, setSearchTerm, setIsLoadingMore } = useCatalogListFetch('movie');
 
     if (error) {
         return <Error />

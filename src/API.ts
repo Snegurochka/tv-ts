@@ -27,10 +27,10 @@ const defaultDELETEConfig = {
 };
 
 const API = {
-  fetchMovies: async (searchTerm: string, page: number): Promise<MoviesStateType> => {
+  fetchMovies: async (type: string, searchTerm: string, page: number): Promise<MoviesStateType> => {
     const endpoint = searchTerm
-      ? `${SEARCH_BASE_URL}${searchTerm}&page=${page}`
-      : `${POPULAR_BASE_URL}&page=${page}`;
+      ? `${API_URL}search/${type}?api_key=${API_KEY}&language=en-US&query=${searchTerm}&page=${page}`
+      : `${API_URL}${type}/popular?api_key=${API_KEY}&language=en-US&page=${page}`;
     return await (await fetch(endpoint)).json();
   },
   fetchMovie: async (movieId: string): Promise<MoviType> => {

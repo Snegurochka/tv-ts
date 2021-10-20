@@ -27,7 +27,7 @@ const Movie: React.FC = () => {
 
         <MovieInfo movie={movie} />
 
-        <MovieInfoBar time={movie.runtime} buget={movie.budget} revenue={movie.revenue}/>
+        {movie.runtime ? (<MovieInfoBar time={movie.runtime} buget={movie.budget} revenue={movie.revenue}/>) : null }
 
         {movie.backdrops ? (<Gallery header='Photos' photos={movie.backdrops}/>) : null}
 
