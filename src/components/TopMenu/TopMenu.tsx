@@ -24,15 +24,14 @@ const menu = [
         path: AppRoute.TV,
         icon: homeIcon,
     },
-    {
-        title: 'WatchList',
-        path: AppRoute.WATCH_LIST,
-        icon: watchlistIcon,
-    },
+    // {
+    //     title: 'WatchList',
+    //     path: AppRoute.WATCH_LIST,
+    //     icon: watchlistIcon,
+    // },
 ]
 
 const TopMenu: React.FC<PropsType> = () => {
-
     const { pathname } = useLocation();
 
     return (

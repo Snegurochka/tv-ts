@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { Wrapper, Content } from './Header.styles';
-import logo from '../../img/logo_kino_list.png';
+import { Wrapper, Content, Logo } from './Header.styles';
+import logoIcon from '../../img/logo_kino_list.png';
 
 // Components
 import UserBlock from '../UserBlock/UserBlock';
@@ -13,7 +13,7 @@ const Header: React.FC = () => (
     <Wrapper>
         <Content>
             <Link to={AppRoute.HOME}>
-                <img src={logo} alt="logo" width="160" />
+                <Logo src={logoIcon} alt="logo" width="160" />
             </Link>
             <TopMenu />
 

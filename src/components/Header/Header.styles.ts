@@ -3,6 +3,11 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
   background: var(--darkGrey);
   padding: 0 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
 `;
 
 export const Content = styled.div`
@@ -12,20 +17,14 @@ export const Content = styled.div`
   max-width: var(--maxWidth);
   padding: 12px 0;
   margin: 0 auto;
-`;
 
-export const LogoImg = styled.img`
-  width: 200px;
-
-  @media screen and (max-width: 500px) {
-    width: 150px;
+  @media screen and (max-width: 680px) {
+    padding: 4px 0;
   }
 `;
 
-export const TMDBLogoImg = styled.img`
-  width: 100px;
-
-  @media screen and (max-width: 500px) {
-    width: 80px;
+export const Logo = styled.img`
+  @media screen and (max-width: 680px) {
+    max-width: 90px;
   }
 `;

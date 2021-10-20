@@ -37,4 +37,14 @@ export const Wrapper = styled.nav`
             transform: scaleX(1);
         }
     }
+
+    @media screen and (max-width: 680px) {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        height: 5rem;
+        width: 100%;
+        background: var(--darkGrey);
+        justify-content: center;
+    }
 `
