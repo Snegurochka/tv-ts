@@ -8,6 +8,7 @@ You can see in live: https://kinolist.netlify.app/
 # Technologies used: 
 - React, React Hooks, Custom Hooks, Redux
 - TypeScript, JS,
+- REST API - themoviedb.org
 - "styled-components" for layout,
 - Jest (Unit tests, Snapshot tests)
 

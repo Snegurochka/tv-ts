@@ -11,11 +11,11 @@ import Thumb from '../Thumb/Thumb';
 import Grid from '../Grid/Grid';
 import Spinner from "../Spinner/Spinner";
 import SearchBar from "../SearchBar/SearchBar";
-import Button from "../Button/Button";
 import Error from "../Error/Error";
 
 // Hook
 import { useCatalogListFetch } from '../../hooks/useCatalogListFetch';
+import Button from "../UI/Button/Button";
 
 
 

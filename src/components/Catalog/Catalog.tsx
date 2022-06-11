@@ -12,7 +12,8 @@ import Thumb from "../Thumb/Thumb";
 import Error from "../Error/Error";
 import SearchBar from "../SearchBar/SearchBar";
 import { Spinner } from "../Spinner/Spinner.styles";
-import Button from "../Button/Button";
+import Button from "../UI/Button/Button";
+
 
 const Catalog: React.FC = () => {
     const { category } = useParams<{category: string}>();

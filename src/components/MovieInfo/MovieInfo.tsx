@@ -1,6 +1,6 @@
 import React from 'react';
 import { MovieState } from '../../types';
-import { Content, Wrapper, Text } from './MovieInfo.styles';
+import { Content, Wrapper, Text, Director, Score, RatingWrapper } from './MovieInfo.styles';
 import NoImage from '../../img/no_image.jpg';
 import { POSTER_SIZE, IMAGE_BASE_URL } from '../../config';
 
@@ -29,20 +29,19 @@ const MovieInfo: React.FC<PropsType> = ({ movie }) => {
                     <h3>Plot</h3>
                     <p>{movie.overview}</p>
 
-                    <div className="rating-directors">
+                    <RatingWrapper>
                         <div>
                             <h3>Rating</h3>
-                            <div className="score">{movie.vote_average}</div>
+                            <Score>{movie.vote_average}</Score>
                         </div>
                         {movie.directors ? (
-                            <div className="director">
+                            <Director>
                                 <h3>Director{movie.directors.length > 1 ? 's' : ''}</h3>
                                 {movie.directors.map(director => (
                                     <p key={director.credit_id}>{director.name}</p>
                                 ))}
-                            </div>) : null}
-
-                    </div>
+                            </Director>) : null}
+                    </RatingWrapper>
                 </Text>
             </Content>
         </Wrapper>

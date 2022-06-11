@@ -22,7 +22,7 @@ max-height: 385px;
 overflow: hidden;
 `;
 
-export const Content_Greed = styled.div`
+export const ContentGreed = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(196px, 1fr));
   grid-gap: 14px;

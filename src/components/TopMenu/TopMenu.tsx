@@ -1,7 +1,7 @@
 import React from "react";
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
-import { Wrapper } from "./TopMenu.styles";
+import { Item, Wrapper } from "./TopMenu.styles";
 import homeIcon from '../../img/home-icon.svg';
 import movieIcon from '../../img/movie-icon.svg';
 import tvIcon from '../../img/tv-icon.svg';
@@ -26,11 +26,11 @@ const menu = [
         path: AppRoute.TV,
         icon: tvIcon,
     },
-    // {
-    //     title: 'WatchList',
-    //     path: AppRoute.WATCH_LIST,
-    //     icon: watchlistIcon,
-    // },
+    {
+        title: 'WatchList',
+        path: AppRoute.WATCH_LIST,
+        icon: watchlistIcon,
+    },
 ]
 
 const TopMenu: React.FC<PropsType> = () => {
@@ -39,13 +39,13 @@ const TopMenu: React.FC<PropsType> = () => {
     return (
         <Wrapper>
             {menu.map((item, ind) => (
-                <Link key={ind} to={item.path} className={
+                <Item key={ind} to={item.path} className={
                     item.path === pathname
                         ? 'active'
                         : ''}>
                     <img src={item.icon} width="20" alt={item.title} />
                     <span>{item.title}</span>
-                </Link>
+                </Item>
             ))}
         </Wrapper>
     )

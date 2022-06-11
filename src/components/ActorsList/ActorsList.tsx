@@ -6,7 +6,8 @@ import Grid from '../Grid/Grid';
 import NoImage from '../../img/no_image.jpg';
 
 import { Wrapper } from "./ActorsList.styles";
-import Button from "../Button/Button";
+import Button from "../UI/Button/Button";
+
 
 type PropsType = {
     actors: ActorType[]

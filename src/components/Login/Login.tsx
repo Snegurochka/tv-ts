@@ -7,8 +7,9 @@ import { useHistory } from "react-router";
 import { Wrapper } from "./Login.styles";
 
 // Components
-import Button from "../Button/Button";
+import Button from "../UI/Button/Button";
 import { AppRoute } from "../../const";
+
 
 
 type PropsType = {}
