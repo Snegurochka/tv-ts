@@ -21,7 +21,7 @@ const UserBlock: React.FC<PropsType> = () => {
     const logoutHandler = async () => {
         const isLogout = await API.logout(sessionId);
         if (isLogout) {
-            dispatch(setLogin({ sessionId: '', username: '' }));
+            dispatch(setLogin({ sessionId: '', email: '' }));
         }
     }
 
