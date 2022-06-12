@@ -13,7 +13,7 @@ import Home from './components/Home/Home';
 import Movie from './components/Movie/Movie';
 import NotFound from './components/NotFound/NotFound';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
-import Login from './components/Login/Login';
+import Authentication from './components/Authentication/Authentication';
 import Catalog from './components/Catalog/Catalog';
 
 
@@ -23,12 +23,12 @@ const App: React.FC = () => (
       <Header />
       <Switch>
         <Route path={AppRoute.HOME} exact component={Home} />
-        <Route path={AppRoute.LOGIN} exact component={Login} />
+        <Route path={AppRoute.LOGIN} exact component={Authentication} />
         <PrivateRoute
           exact
           path={AppRoute.LOGIN}
           authorizationStatus={AuthorizationStatus.NoAuth}
-          render={() => <Login />}
+          render={() => <Authentication />}
         >
         </PrivateRoute>
         <Route

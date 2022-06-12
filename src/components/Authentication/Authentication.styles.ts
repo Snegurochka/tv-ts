@@ -10,15 +10,6 @@ export const Wrapper = styled.div`
         gap: 1.5rem;
     }
 
-    input {
-        width: 100%;
-        height: 2.75rem;
-        padding: .75rem 1rem;
-        margin-top: .25rem;
-        border-radius: 1rem;
-        border: 1px solid var(--medGrey);
-    }
-
     @media screen and (max-width: 680px) {
         max-width: 20rem;
     }

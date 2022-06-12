@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { setLogin, setGravatar } from "./../../store/AC/auth";
+import { setLogin, setGravatar } from "../../store/AC/auth";
 import API from "../../API";
 import { useHistory } from "react-router";
 
-import { Wrapper } from "./Login.styles";
+import { Wrapper } from "./Authentication.styles";
 
 // Components
 import Button from "../UI/Button/Button";
 import { AppRoute } from "../../const";
+import Input from "../UI/Input/Input";
 
 
 
 type PropsType = {}
 
-const Login: React.FC<PropsType> = () => {
+const Authentication: React.FC<PropsType> = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false);
@@ -46,15 +47,7 @@ const Login: React.FC<PropsType> = () => {
             <h2>Log in to your account</h2>
             {error && <div className='error'>There was an error!</div>}
             <form action="#" method="post">
-                <label><span>Email address</span>
-                    <input
-                        type='text'
-                        value={username}
-                        name='username'
-                        placeholder="example@example.com"
-                        onChange={(evt) => { setUsername(evt.currentTarget.value) }}
-                    />
-                </label>
+                <Input label='Email address' name='email' value=''/>
                 <label><span>Password</span>
                     <input
                         type='password'
@@ -69,4 +62,4 @@ const Login: React.FC<PropsType> = () => {
     )
 }
 
-export default Login;
+export default Authentication;
