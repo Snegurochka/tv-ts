@@ -1,10 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AppStateType } from "../../store/reducers";
 import { setLogin } from "../../store/AC/auth";
 
-import { Wrapper, Avatar, LogoutLink } from "./UserBlock.styles";
+import { Wrapper, Avatar, LogoutLink, AvatarLink } from "./UserBlock.styles";
 
 import API from "../../API";
 import { AppRoute } from "../../const";
@@ -22,7 +21,7 @@ const UserBlock: React.FC<PropsType> = () => {
     const logoutHandler = async () => {
         const isLogout = await API.logout(sessionId);
         if (isLogout) {
-            dispatch(setLogin({ sessionId: '', username: '' }));
+            dispatch(setLogin({ sessionId: '', email: '' }));
         }
     }
 
@@ -40,10 +39,10 @@ const UserBlock: React.FC<PropsType> = () => {
                         </span>
                     </>
                 )
-                : (<Link to={AppRoute.LOGIN} >
+                : (<AvatarLink to={AppRoute.LOGIN} >
                     <Avatar src={AvatarImg} alt="User avatar" width="50" height="50" />
                     <span>Sign In</span>
-                </Link>)}
+                </AvatarLink>)}
 
         </Wrapper>
     )

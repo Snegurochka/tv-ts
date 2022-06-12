@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
@@ -5,22 +6,22 @@ export const Wrapper = styled.div`
     display: flex;
     align-items: center;
     gap: 14px;
+`;
 
-    a {
-        cursor:pointer;
-        display: flex;
-        align-items: center;
-        gap: 14px;
-        text-decoration: none;
+export const AvatarLink = styled(Link)`
+    cursor:pointer;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
 
-        color: var(--white);
+    color: var(--white);
 
-        span {
-            opacity: .6;
-            transition: all 200ms;
-        }
+    span {
+        opacity: .6;
+        transition: all 200ms;
 
-        span:hover {
+        &:hover {
             opacity: 1;
         }
     }

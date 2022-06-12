@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { IMAGE_BASE_URL, POSTER_SIZE } from "../../config";
 import { Backdrops } from "../../types";
 
-import { Wrapper, Content, Content_Greed, BigImg, Image } from "./Gallery.styles";
+import { Wrapper, Content, ContentGreed, BigImg, Image } from "./Gallery.styles";
 
 type PropsType = {
     header: string,
@@ -16,7 +16,7 @@ const Gallery: React.FC<PropsType> = ({ header, photos }) => {
             <h1>{header}</h1>
             <Content>
                 <BigImg data-testid="thumbnail" src={`${IMAGE_BASE_URL}${POSTER_SIZE}${photos[active].file_path}`} alt={`Photo ${header}`} />
-                <Content_Greed>
+                <ContentGreed>
                     {photos.map((photo, index) => (
                         <Image
                             key={index}
@@ -30,7 +30,7 @@ const Gallery: React.FC<PropsType> = ({ header, photos }) => {
                             className={index === active ? "active" : ""}
                         />
                     ))}
-                </Content_Greed>
+                </ContentGreed>
 
             </Content>
         </Wrapper>

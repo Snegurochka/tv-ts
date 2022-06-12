@@ -2,7 +2,7 @@ import { SET_GRAVATAR, SET_LOGIN } from "./actionTypes";
 
 export interface Ilogin {
     sessionId: string,
-    username: string
+    email: string
 }
 
 interface ISETLOGINAction {
