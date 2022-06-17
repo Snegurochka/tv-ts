@@ -7,6 +7,9 @@ export const Wrapper = styled.div`
   h2 {
     margin: 10px 0;
   }
+  p {
+    color: gray;
+  }
 `;
 
 export const ButtonsContainer = styled.div`
