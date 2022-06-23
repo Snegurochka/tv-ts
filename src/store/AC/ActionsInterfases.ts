@@ -1,3 +1,4 @@
+import { fetchCommentsFailed, fetchCommentsStart, fetchCommentsSuccess } from "../comments/comments.action";
 import { SET_GRAVATAR, SET_LOGIN } from "./actionTypes";
 
 export interface Ilogin {
@@ -16,4 +17,9 @@ interface ISETGRAVATERINAction {
 }
 
 export type IAuthAction = ISETLOGINAction | ISETGRAVATERINAction;
+
+export type ICommentsAction =
+    | ReturnType<typeof fetchCommentsStart>
+    | ReturnType<typeof fetchCommentsSuccess>
+    | ReturnType<typeof fetchCommentsFailed>
 

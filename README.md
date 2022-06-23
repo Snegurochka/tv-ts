@@ -6,9 +6,10 @@ You can use your real account from themoviedb.org to log in.
 You can see in live: https://kinolist.netlify.app/
 
 # Technologies used: 
-- React, React Hooks, Custom Hooks, Redux
-- TypeScript, JS,
-- REST API - themoviedb.org
+- React, React Hooks, Custom Hooks, Redux, Redux-Saga
+- TypeScript,
+- REST API - themoviedb.org,
+- Firebase (Auth) and Firestore,
 - "styled-components" for layout,
 - Jest (Unit tests, Snapshot tests)
 
