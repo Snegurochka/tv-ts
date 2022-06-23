@@ -51,6 +51,7 @@ export type Photos = {
 }
 
 export type CommentType = {
+    uid: string,
     title: string,
     text: string,
 }
