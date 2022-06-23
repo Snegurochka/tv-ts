@@ -12,15 +12,10 @@ export const selectCommentsSlice = createSelector(
 
 export const selectComments = createSelector(
     [selectCommentsSlice],
-    // (comments) => comments.reduce((acc, { uid, title, text }, index) => {
-    //     acc[index] = { uid, title, text };
-    //     return acc;
-    // }, [] as CommentType[])
-    (comments) => {
-        console.log(comments);
-        
-        return []
-    }
+    (comments) => comments.reduce((acc, { uid, title, text }, index) => {
+        acc[index] = { uid, title, text };
+        return acc;
+    }, [] as CommentType[])
 );
 
 export const selectCommentsIsLoading = createSelector(
