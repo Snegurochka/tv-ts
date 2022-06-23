@@ -1,3 +1,7 @@
-import { all } from 'redux-saga/effects';
+import { all, call } from 'redux-saga/effects';
 
-export function* rootSaga() {}
+import { commentsSaga } from './comments/comments.saga';
+
+export function* rootSaga() {
+    yield all([call(commentsSaga)])
+}

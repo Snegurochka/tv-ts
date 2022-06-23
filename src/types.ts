@@ -49,3 +49,8 @@ export type Photos = {
     id: number,
     backdrops: Backdrops[]
 }
+
+export type CommentType = {
+    title: string,
+    text: string,
+}

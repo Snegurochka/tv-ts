@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, query, getDocs } from 'firebase/firestore';
+import { CommentType } from '../types';
 
 const firebaseConfig = {
     apiKey: "AIzaSyBOcX8hqzda1h_vzEfvElYNlQvLiBjCS20",
@@ -25,7 +26,7 @@ export const getCollectionAndDocuments = async (collectionName: string, params =
 };
 
 // Comments
-export const getCommentsByMovieFromAPI = async (id: string) => {
+export const getCommentsByMovieFromAPI = async (id: string) : Promise<CommentType[]> => {
     const querySnapshot = await getCollectionAndDocuments('comments');
-    return querySnapshot.docs.map((doc) => doc.data());
+    return querySnapshot.docs.map((doc) => doc.data() as CommentType);
 };
