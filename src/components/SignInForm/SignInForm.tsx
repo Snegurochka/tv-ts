@@ -1,9 +1,11 @@
 import React, { ChangeEvent, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import API from '../../API';
 import { AppRoute } from '../../const';
 import { setGravatar, setLogin } from '../../store/AC/auth';
+import { googleSignInStart } from '../../store/user/user.action';
+import { isLoginError } from '../../store/user/user.selector';
 import Button from '../UI/Button/Button';
 import Input from '../UI/Input/Input';
 
@@ -15,9 +17,9 @@ const defaultFormFields = {
 };
 
 const SignInForm: React.FC = () => {
-    const [error, setError] = useState(false);
     const [formFields, setFormFields] = useState(defaultFormFields);
     const { email, password } = formFields;
+    const error = useSelector(isLoginError);
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -26,24 +28,22 @@ const SignInForm: React.FC = () => {
         setFormFields(defaultFormFields);
     };
 
-    const handleSubmit = async () => {
-        setError(false);
-
-        try {
-            const requestToken = await API.getRequestToken();
-            const sessionId = await API.authenticate(
-                requestToken,
-                email,
-                password
-            );
-            dispatch(setLogin({ sessionId: sessionId.session_id, email }));
-            const userInfo = await API.fetchUserInfo(sessionId.session_id);
-            dispatch(setGravatar(userInfo.avatar.gravatar.hash));
-            resetFormFields();
-            history.push(AppRoute.HOME);
-        } catch (error) {
-            setError(true);
-        }
+    const handleSubmitThemoviedb = async () => {
+        // try {
+        //     const requestToken = await API.getRequestToken();
+        //     const sessionId = await API.authenticate(
+        //         requestToken,
+        //         email,
+        //         password
+        //     );
+        //     dispatch(setLogin({ sessionId: sessionId.session_id, email }));
+        //     const userInfo = await API.fetchUserInfo(sessionId.session_id);
+        //     dispatch(setGravatar(userInfo.avatar.gravatar.hash));
+        //     resetFormFields();
+        //     history.push(AppRoute.HOME);
+        // } catch (error) {
+        //     //setError(true);
+        // }
     }
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -51,6 +51,14 @@ const SignInForm: React.FC = () => {
 
         setFormFields({ ...formFields, [name]: value });
     };
+
+    const logGoogleUser = async () => {
+        dispatch(googleSignInStart());
+    };
+
+    const handleSubmit = async () => {
+
+    }
 
     return (
         <Wrapper>
@@ -71,6 +79,7 @@ const SignInForm: React.FC = () => {
                     value={password} />
                 <ButtonsContainer>
                     <Button text='Login' callback={handleSubmit} />
+                    <Button text='Sign in with Google Popup' callback={logGoogleUser} />
                 </ButtonsContainer>
 
             </form>

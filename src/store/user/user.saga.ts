@@ -13,7 +13,7 @@ import { USER_ACTION_TYPES } from "./user.types";
 
 export function* signInWithGoogle() {
     try {
-        const user: User = yield call(signInWithGooglePopup);
+        const { user } = yield call(signInWithGooglePopup);
         yield call(getSnapshotFromUserAuth, user);
     } catch (error) {
         yield put(signInFailed('Error user saga'));
