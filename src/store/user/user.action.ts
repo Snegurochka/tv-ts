@@ -24,3 +24,11 @@ export const signInFailed = (error: string) => ({
     type: USER_ACTION_TYPES.SIGN_IN_FAILED,
     payload: error
 } as const);
+
+export type IUserAction =
+    | ReturnType<typeof setCurrentUser>
+    | ReturnType<typeof checkUserSession>
+    | ReturnType<typeof googleSignInStart>
+    | ReturnType<typeof emailSignInStart>
+    | ReturnType<typeof signInSuccess>
+    | ReturnType<typeof signInFailed>
