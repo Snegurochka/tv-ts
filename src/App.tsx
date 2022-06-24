@@ -1,48 +1,44 @@
 // Routing and Store
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import store from './store/store';
+import { useEffect } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { checkUserSession } from './store/user/user.action';
 
-// Styles and const
-import { GlobalStyle } from './GlobalStyle';
+// const
 import { AppRoute, AuthorizationStatus } from './const';
 
 // Components
-import Header from './components/Header/Header';
-import Home from './components/Home/Home';
-import Movie from './components/Movie/Movie';
-import NotFound from './components/NotFound/NotFound';
+import Home from './pages/Home/Home';
+import Movie from './pages/Movie/Movie';
+import NotFound from './pages/NotFound/NotFound';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
-import Authentication from './components/Authentication/Authentication';
-import Catalog from './components/Catalog/Catalog';
+import Authentication from './pages/Authentication/Authentication';
+import Catalog from './pages/Catalog/Catalog';
 
+const App: React.FC = () => {
+  const dispatch = useDispatch();
 
-const App: React.FC = () => (
-  <Provider store={store} >
-    <BrowserRouter>
-      <Header />
-      <Switch>
-        <Route path={AppRoute.HOME} exact component={Home} />
-        <Route path={AppRoute.LOGIN} exact component={Authentication} />
-        <PrivateRoute
-          exact
-          path={AppRoute.LOGIN}
-          authorizationStatus={AuthorizationStatus.NoAuth}
-          render={() => <Authentication />}
-        >
-        </PrivateRoute>
-        <Route
-                path={AppRoute.CATALOG}
-                component={Catalog}
-            />
-        <Route path='/:movieId' component={Movie} />
-        <Route path='/*' component={NotFound} />
-      </Switch>
+  useEffect(() => {
+    checkUserSession();
+  }, [dispatch]);
 
-      <GlobalStyle />
-    </BrowserRouter>
-  </Provider>
-);
-
+  return <Switch>
+    <Route path={AppRoute.HOME} exact component={Home} />
+    <Route path={AppRoute.LOGIN} exact component={Authentication} />
+    <PrivateRoute
+      exact
+      path={AppRoute.LOGIN}
+      authorizationStatus={AuthorizationStatus.NoAuth}
+      render={() => <Authentication />}
+    >
+    </PrivateRoute>
+    <Route
+      path={AppRoute.CATALOG}
+      component={Catalog}
+    />
+    <Route path='/:movieId' component={Movie} />
+    <Route path='/*' component={NotFound} />
+  </Switch>
+};
 
 export default App;
