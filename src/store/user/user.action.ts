@@ -25,10 +25,20 @@ export const signInFailed = (error: string) => ({
     payload: error
 } as const);
 
+export const SignOutStart = () => ({ type: USER_ACTION_TYPES.SIGN_OUT_START } as const);
+
+export const signOutFailed = (error: string) => ({
+    type: USER_ACTION_TYPES.SIGN_OUT_FAILED,
+    payload: error
+} as const);
+
+export type emailSignInStartType = ReturnType<typeof emailSignInStart>;
+
 export type IUserAction =
     | ReturnType<typeof setCurrentUser>
     | ReturnType<typeof checkUserSession>
     | ReturnType<typeof googleSignInStart>
-    | ReturnType<typeof emailSignInStart>
+    | emailSignInStartType
     | ReturnType<typeof signInSuccess>
     | ReturnType<typeof signInFailed>
+    | ReturnType<typeof SignOutStart>

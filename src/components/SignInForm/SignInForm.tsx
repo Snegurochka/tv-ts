@@ -1,11 +1,10 @@
 import React, { ChangeEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import API from '../../API';
 import { AppRoute } from '../../const';
-import { setGravatar, setLogin } from '../../store/AC/auth';
-import { googleSignInStart } from '../../store/user/user.action';
+import { emailSignInStart, googleSignInStart } from '../../store/user/user.action';
 import { isLoginError } from '../../store/user/user.selector';
+
 import Button from '../UI/Button/Button';
 import Input from '../UI/Input/Input';
 
@@ -28,23 +27,23 @@ const SignInForm: React.FC = () => {
         setFormFields(defaultFormFields);
     };
 
-    const handleSubmitThemoviedb = async () => {
-        // try {
-        //     const requestToken = await API.getRequestToken();
-        //     const sessionId = await API.authenticate(
-        //         requestToken,
-        //         email,
-        //         password
-        //     );
-        //     dispatch(setLogin({ sessionId: sessionId.session_id, email }));
-        //     const userInfo = await API.fetchUserInfo(sessionId.session_id);
-        //     dispatch(setGravatar(userInfo.avatar.gravatar.hash));
-        //     resetFormFields();
-        //     history.push(AppRoute.HOME);
-        // } catch (error) {
-        //     //setError(true);
-        // }
-    }
+    // const handleSubmitThemoviedb = async () => {
+    //     try {
+    //         const requestToken = await API.getRequestToken();
+    //         const sessionId = await API.authenticate(
+    //             requestToken,
+    //             email,
+    //             password
+    //         );
+    //         dispatch(setLogin({ sessionId: sessionId.session_id, email }));
+    //         const userInfo = await API.fetchUserInfo(sessionId.session_id);
+    //         dispatch(setGravatar(userInfo.avatar.gravatar.hash));
+    //         resetFormFields();
+    //         history.push(AppRoute.HOME);
+    //     } catch (error) {
+    //         //setError(true);
+    //     }
+    // }
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
@@ -57,13 +56,19 @@ const SignInForm: React.FC = () => {
     };
 
     const handleSubmit = async () => {
-
+        try {
+            dispatch(emailSignInStart(email, password));
+            resetFormFields();
+            history.push(AppRoute.HOME);
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     return (
         <Wrapper>
             <h2>Log in to your account</h2>
-            <p>You can use themoviedb.org login</p>
+            {/* <p>You can use themoviedb.org login</p> */}
             {error && <div className='error'>There was an error!</div>}
             <form action="#" method="post">
                 <Input

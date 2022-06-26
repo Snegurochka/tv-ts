@@ -6,19 +6,12 @@ import { UserType } from "../../types";
 import {
     createUserDocumentFromAuth,
     getCurrentUser,
-    signInWithGooglePopup
+    signInAuthUserWithEmailAndPassword,
+    signInWithGooglePopup,
+    signOutUser
 } from "../../utils/firebase.utils";
-import { signInFailed, signInSuccess } from "./user.action";
+import { emailSignInStartType, signInFailed, signInSuccess, signOutFailed } from "./user.action";
 import { USER_ACTION_TYPES } from "./user.types";
-
-export function* signInWithGoogle() {
-    try {
-        const { user } = yield call(signInWithGooglePopup);
-        yield call(getSnapshotFromUserAuth, user);
-    } catch (error) {
-        yield put(signInFailed('Error user saga'));
-    }
-}
 
 export function* getSnapshotFromUserAuth(
     userAuth: User,
@@ -46,6 +39,39 @@ export function* isUserAuthenticated() {
     }
 }
 
+export function* signInWithGoogle() {
+    try {
+        const { user } = yield call(signInWithGooglePopup);
+        yield call(getSnapshotFromUserAuth, user);
+    } catch (error) {
+        yield put(signInFailed('Error user saga'));
+    }
+}
+
+export function* signInWithEmail({
+    payload: { email, password },
+}: emailSignInStartType,
+) {
+    try {
+        const { user } = yield call(signInAuthUserWithEmailAndPassword, email, password);
+        yield call(getSnapshotFromUserAuth, user);
+    } catch (error) {
+        yield put(signInFailed('Error user saga'));
+    }
+}
+
+export function* SignOut() {
+    try {
+        signOutUser();
+    } catch (error) {
+        yield put(signOutFailed('Error user saga'));
+    }
+}
+
+export function* onEmailSignInStart() {
+    yield takeLatest(USER_ACTION_TYPES.EMAIL_SIGN_IN_START, signInWithEmail);
+}
+
 export function* onCheckUserSession() {
     yield takeLatest(USER_ACTION_TYPES.CHECK_USER_SESSION, isUserAuthenticated);
 }
@@ -54,9 +80,15 @@ export function* onGoogleSignInStart() {
     yield takeLatest(USER_ACTION_TYPES.GOOGLE_SIGN_IN_START, signInWithGoogle);
 }
 
+export function* onSignOutStart() {
+    yield takeLatest(USER_ACTION_TYPES.SIGN_OUT_START, SignOut);
+}
+
 export function* userSaga() {
     yield all([
         call(onCheckUserSession),
-        call(onGoogleSignInStart)
+        call(onGoogleSignInStart),
+        call(onEmailSignInStart),
+        call(onSignOutStart)
     ]);
 }

@@ -6,6 +6,7 @@ import { Wrapper, Avatar, LogoutLink, AvatarLink } from "./UserBlock.styles";
 
 import { AppRoute } from "../../const";
 import AvatarImg from '../../img/avatar.png';
+import { SignOutStart } from "../../store/user/user.action";
 
 
 type PropsType = {}
@@ -15,11 +16,15 @@ const UserBlock: React.FC<PropsType> = () => {
     //const { sessionId, username, gravatar } = { ...auth };
     const dispatch = useDispatch();
 
+    // const logoutThemoviedbHandler = async () => {
+    //     const isLogout = await API.logout(sessionId);
+    //     if (isLogout) {
+    //         dispatch(setLogin({ sessionId: '', email: '' }));
+    //     }
+    // }
+
     const logoutHandler = async () => {
-        // const isLogout = await API.logout(sessionId);
-        // if (isLogout) {
-        //     dispatch(setLogin({ sessionId: '', email: '' }));
-        // }
+        dispatch(SignOutStart());
     }
 
     return (
