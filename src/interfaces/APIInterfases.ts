@@ -9,3 +9,7 @@ export interface IUserInfoAPIResponse {
         }
       },
 }
+
+export interface AdditionalUserInformation {
+  displayName?: string;
+};

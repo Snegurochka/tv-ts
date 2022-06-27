@@ -2,21 +2,21 @@ import React from "react";
 import { useParams } from "react-router";
 import { useCatalogListFetch } from "../../hooks/useCatalogListFetch";
 
-import { Wrapper } from "./Catalog.styles";
 import NoImage from '../../img/no_image.jpg';
 import { BACKDROP_SIZE, IMAGE_BASE_URL } from '../../config';
 
 // Components
-import Grid from "../Grid/Grid";
-import Thumb from "../Thumb/Thumb";
-import Error from "../Error/Error";
-import SearchBar from "../SearchBar/SearchBar";
-import { Spinner } from "../Spinner/Spinner.styles";
-import Button from "../UI/Button/Button";
+import Grid from "../../components/Grid/Grid";
+import Thumb from "../../components/Thumb/Thumb";
+import Error from "../../components/Error/Error";
+import SearchBar from "../../components/SearchBar/SearchBar";
+import { Spinner } from "../../components/Spinner/Spinner.styles";
+import Button from "../../components/UI/Button/Button";
+import Layout from "../../components/Layout/Layout";
 
 
 const Catalog: React.FC = () => {
-    const { category } = useParams<{category: string}>();
+    const { category } = useParams<{ category: string }>();
 
     const { state, loading, error, setSearchTerm, setIsLoadingMore } = useCatalogListFetch(category);
 
@@ -25,10 +25,10 @@ const Catalog: React.FC = () => {
     }
 
     return (
-        <Wrapper>
+        <Layout>
             <SearchBar setSearchTerm={setSearchTerm} />
             <Grid header={category === 'movie' ? 'Movies' : 'TV Series'}>
-            {state.results.map((movie) => (
+                {state.results.map((movie) => (
                     <Thumb
                         key={movie.id}
                         image={
@@ -44,7 +44,7 @@ const Catalog: React.FC = () => {
             {state.page < state.total_pages && !loading && (
                 <Button text='Load More' callback={() => setIsLoadingMore(true)} />
             )}
-        </Wrapper>
+        </Layout>
     )
 }
 

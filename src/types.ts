@@ -55,3 +55,9 @@ export type CommentType = {
     title: string,
     text: string,
 }
+
+export type UserType = {
+    createdAt: Date,
+    displayName: string,
+    email: string,
+}

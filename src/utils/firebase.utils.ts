@@ -1,6 +1,17 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, query, getDocs } from 'firebase/firestore';
-import { CommentType } from '../types';
+import { getFirestore, collection, query, getDocs, QueryDocumentSnapshot, doc, getDoc, setDoc } from 'firebase/firestore';
+import {
+    getAuth,
+    signInWithRedirect,
+    signInWithPopup,
+    GoogleAuthProvider,
+    onAuthStateChanged,
+    User,
+    signInWithEmailAndPassword,
+    signOut,
+} from 'firebase/auth';
+import { CommentType, UserType } from '../types';
+import { AdditionalUserInformation } from '../interfaces/APIInterfases';
 
 const firebaseConfig = {
     apiKey: "AIzaSyBOcX8hqzda1h_vzEfvElYNlQvLiBjCS20",
@@ -26,7 +37,74 @@ export const getCollectionAndDocuments = async (collectionName: string, params =
 };
 
 // Comments
-export const getCommentsByMovieFromAPI = async (id: string) : Promise<CommentType[]> => {
+export const getCommentsByMovieFromAPI = async (id: string): Promise<CommentType[]> => {
     const querySnapshot = await getCollectionAndDocuments('comments');
     return querySnapshot.docs.map((doc) => doc.data() as CommentType);
 };
+
+// Auth
+const googleProvider = new GoogleAuthProvider();
+
+googleProvider.setCustomParameters({
+    prompt: 'select_account',
+});
+export const auth = getAuth();
+
+export const signInWithGooglePopup = () =>
+    signInWithPopup(auth, googleProvider);
+export const signInWithGoogleRedirect = () =>
+    signInWithRedirect(auth, googleProvider);
+
+export const getCurrentUser = (): Promise<User | null> => {
+    return new Promise((resolve, reject) => {
+        const unsubscribe = onAuthStateChanged(
+            auth,
+            (userAuth) => {
+                console.log(unsubscribe);
+                unsubscribe();
+                resolve(userAuth);
+            },
+            reject
+        );
+    });
+};
+
+export const createUserDocumentFromAuth = async (
+    userAuth: User,
+    additionalInformation = {} as AdditionalUserInformation
+): Promise<void | QueryDocumentSnapshot<UserType>> => {
+    if (!userAuth) return;
+
+    const userDocRef = doc(db, 'users', userAuth.uid);
+
+    const userSnapshot = await getDoc(userDocRef);
+
+    if (!userSnapshot.exists()) {
+        const { displayName, email } = userAuth;
+        const createdAt = new Date();
+
+        try {
+            await setDoc(userDocRef, {
+                displayName,
+                email,
+                createdAt,
+                ...additionalInformation,
+            });
+        } catch (error) {
+            console.log('error creating the user', error);
+        }
+    }
+
+    return userSnapshot as QueryDocumentSnapshot<UserType>;
+};
+
+export const signInAuthUserWithEmailAndPassword = async (
+    email: string,
+    password: string
+  ) => {
+    if (!email || !password) return;
+  
+    return await signInWithEmailAndPassword(auth, email, password);
+  };
+  
+  export const signOutUser = async () => await signOut(auth);
