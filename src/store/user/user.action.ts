@@ -26,6 +26,7 @@ export const signInFailed = (error: string) => ({
 } as const);
 
 export const SignOutStart = () => ({ type: USER_ACTION_TYPES.SIGN_OUT_START } as const);
+export const SignOutSuccess = () => ({ type: USER_ACTION_TYPES.SIGN_OUT_SUCCESS } as const);
 
 export const signOutFailed = (error: string) => ({
     type: USER_ACTION_TYPES.SIGN_OUT_FAILED,
@@ -41,4 +42,5 @@ export type IUserAction =
     | emailSignInStartType
     | ReturnType<typeof signInSuccess>
     | ReturnType<typeof signInFailed>
-    | ReturnType<typeof SignOutStart>
+    | ReturnType<typeof SignOutSuccess>
+    | ReturnType<typeof signOutFailed>

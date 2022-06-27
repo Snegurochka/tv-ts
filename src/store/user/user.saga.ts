@@ -10,7 +10,7 @@ import {
     signInWithGooglePopup,
     signOutUser
 } from "../../utils/firebase.utils";
-import { emailSignInStartType, signInFailed, signInSuccess, signOutFailed } from "./user.action";
+import { emailSignInStartType, signInFailed, signInSuccess, signOutFailed, SignOutSuccess } from "./user.action";
 import { USER_ACTION_TYPES } from "./user.types";
 
 export function* getSnapshotFromUserAuth(
@@ -18,7 +18,7 @@ export function* getSnapshotFromUserAuth(
     additionalDetails?: AdditionalUserInformation) {
     try {
         const userSnapshot: QueryDocumentSnapshot<UserType> = yield call(createUserDocumentFromAuth, userAuth, additionalDetails);
-        console.log(userSnapshot);
+
         if (userSnapshot) {
             yield put(
                 signInSuccess({ ...userSnapshot.data() })
@@ -62,7 +62,8 @@ export function* signInWithEmail({
 
 export function* SignOut() {
     try {
-        signOutUser();
+        yield call(signOutUser);
+        put(SignOutSuccess());
     } catch (error) {
         yield put(signOutFailed('Error user saga'));
     }
