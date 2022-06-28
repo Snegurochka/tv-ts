@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Button from '../UI/Button/Button';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -15,4 +16,11 @@ export const Wrapper = styled.div`
 export const ButtonsContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 `;
+
+export const ButtonGoogle = styled(Button)`
+  background: red;
+  font-size: 16px;
+  width: 100%;
+`

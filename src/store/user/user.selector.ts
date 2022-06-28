@@ -13,3 +13,8 @@ export const isLoginError = createSelector(
     selectUserReducer,
     (user) => user.error
 );
+
+export const isLoging = createSelector(
+    selectUserReducer,
+    (user) => user.isLoading
+);

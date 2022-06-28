@@ -1,14 +1,14 @@
 import React, { ChangeEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { AppRoute } from '../../const';
+// import { useHistory } from 'react-router-dom';
+// import { AppRoute } from '../../const';
 import { emailSignInStart, googleSignInStart } from '../../store/user/user.action';
-import { isLoginError } from '../../store/user/user.selector';
+import { isLoginError, isLoging } from '../../store/user/user.selector';
 
 import Button from '../UI/Button/Button';
 import Input from '../UI/Input/Input';
 
-import { Wrapper, ButtonsContainer } from './SignInForm.styles';
+import { Wrapper, ButtonsContainer, ButtonGoogle } from './SignInForm.styles';
 
 const defaultFormFields = {
     email: '',
@@ -19,9 +19,10 @@ const SignInForm: React.FC = () => {
     const [formFields, setFormFields] = useState(defaultFormFields);
     const { email, password } = formFields;
     const error = useSelector(isLoginError);
+    const isLoading = useSelector(isLoging);
 
     const dispatch = useDispatch();
-    const history = useHistory();
+    //const history = useHistory();
 
     const resetFormFields = () => {
         setFormFields(defaultFormFields);
@@ -59,7 +60,7 @@ const SignInForm: React.FC = () => {
         try {
             dispatch(emailSignInStart(email, password));
             resetFormFields();
-            history.push(AppRoute.HOME);
+            //history.push(AppRoute.HOME);
         } catch (e) {
             console.log(e);
         }
@@ -83,8 +84,8 @@ const SignInForm: React.FC = () => {
                     onChange={handleChange}
                     value={password} />
                 <ButtonsContainer>
-                    <Button text='Login' callback={handleSubmit} />
-                    <Button text='Sign in with Google Popup' callback={logGoogleUser} />
+                    <Button text='Login' callback={handleSubmit} isLoading={isLoading} />
+                    <ButtonGoogle text='Sign in with Google Popup' callback={logGoogleUser} />
                 </ButtonsContainer>
 
             </form>
