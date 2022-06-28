@@ -13,6 +13,7 @@ type PropsType = {}
 
 const UserBlock: React.FC<PropsType> = () => {
     const user = useSelector(selectCurrentUser);
+    
     //const { sessionId, username, gravatar } = { ...auth };
     const dispatch = useDispatch();
 

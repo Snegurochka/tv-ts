@@ -63,7 +63,7 @@ export function* signInWithEmail({
 export function* SignOut() {
     try {
         yield call(signOutUser);
-        put(SignOutSuccess());
+        yield put(SignOutSuccess());
     } catch (error) {
         yield put(signOutFailed('Error user saga'));
     }

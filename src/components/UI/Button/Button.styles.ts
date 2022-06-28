@@ -30,4 +30,5 @@ export const InvertedButton = styled(BaseButton)`
 export const ButtonSpinner = styled(Spinner)`
   width: 30px;
   height: 30px;
+  margin: 10px auto;
 `;
