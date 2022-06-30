@@ -32,3 +32,9 @@ export const ButtonSpinner = styled(Spinner)`
   height: 30px;
   margin: 10px auto;
 `;
+
+export const SmallButton = styled(BaseButton)`
+  font-size: var(--fontMed);
+  height: 45px;
+  min-width: 112px;
+`;

@@ -5,12 +5,6 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 380px;
-  h2 {
-    margin: 10px 0;
-  }
-  p {
-    color: gray;
-  }
 `;
 
 export const ButtonsContainer = styled.div`
@@ -21,6 +15,5 @@ export const ButtonsContainer = styled.div`
 
 export const ButtonGoogle = styled(Button)`
   background: red;
-  font-size: 16px;
-  width: 100%;
+  width: 63%;
 `

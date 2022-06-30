@@ -1,6 +1,6 @@
 import React from 'react';
 // Styles
-import { BaseButton, ButtonSpinner, InvertedButton } from './Button.styles';
+import { BaseButton, ButtonSpinner, InvertedButton, SmallButton } from './Button.styles';
 // Types
 type Props = {
   text: string;
@@ -12,12 +12,14 @@ type Props = {
 export const BUTTON_TYPE_CLASSES = {
   base: 'base',
   inverted: 'inverted',
+  small: 'small',
 };
 
 const getButton = (buttonType = BUTTON_TYPE_CLASSES.base) => (
   {
     [BUTTON_TYPE_CLASSES.base]: BaseButton,
     [BUTTON_TYPE_CLASSES.inverted]: InvertedButton,
+    [BUTTON_TYPE_CLASSES.small]: SmallButton,
   }[buttonType]
 )
 

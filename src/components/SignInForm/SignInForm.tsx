@@ -84,8 +84,8 @@ const SignInForm: React.FC = () => {
                     onChange={handleChange}
                     value={password} />
                 <ButtonsContainer>
-                    <Button text='Login' callback={handleSubmit} isLoading={isLoading} />
-                    <ButtonGoogle text='Sign in with Google Popup' callback={logGoogleUser} />
+                    <Button text='Login' buttonType="small" callback={handleSubmit} isLoading={isLoading} />
+                    <ButtonGoogle text='Sign in with Google' buttonType="small" callback={logGoogleUser} />
                 </ButtonsContainer>
 
             </form>
