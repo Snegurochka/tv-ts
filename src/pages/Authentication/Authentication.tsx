@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "../../components/Layout/Layout";
 import SignInForm from "../../components/SignInForm/SignInForm";
+import SignUpForm from "../../components/SignUpForm/SignUpForm";
 import { Wrapper } from "./Authentication.styles";
 
 const Authentication: React.FC = () => {
@@ -8,6 +9,7 @@ const Authentication: React.FC = () => {
         <Layout>
             <Wrapper>
                 <SignInForm />
+                <SignUpForm />
             </Wrapper>
         </Layout>
     )

@@ -1,7 +1,7 @@
 import React, { InputHTMLAttributes } from 'react';
 import { FormInputLabel, InputWrapper, Group } from './Input.styles';
 
-type FormInputProps = { label: string } & InputHTMLAttributes<HTMLInputElement> & { value: string };
+type FormInputProps = InputHTMLAttributes<HTMLInputElement> & { value: string, label: string  };
 
 const Input: React.FC<FormInputProps> = ({ label, name, value, type = 'text', ...otherParams }) => {
     return (
