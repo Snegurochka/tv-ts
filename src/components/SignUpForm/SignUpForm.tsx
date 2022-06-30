@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { ChangeEvent, FC, FormEvent, useState } from 'react';
+
 import Button from '../UI/Button/Button';
 import Input from '../UI/Input/Input';
 
@@ -9,17 +10,19 @@ const signUpFields = {
     confirmPassword: '',
 }
 
-const SignUpForm: React.FC = () => {
+const SignUpForm: FC = () => {
     const [fields, setFields] = useState(signUpFields);
     const { displayName, email, password } = fields;
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
 
     }
 
-    const changeHandler = () => {
+    const changeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = event.target;
 
-    }
+        setFields({ ...fields, [name]: value });
+    };
 
     return (
         <section>
