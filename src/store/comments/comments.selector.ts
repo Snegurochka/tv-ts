@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 import { CommentType } from '../../interfaces/types';
-import { AppStateType } from '../reducers';
+import { AppStateType } from '../root-reducer';
+
 import { CommentsInitStateType } from './comments.reducer';
 
 const selectCommentsReducer = (state: AppStateType): CommentsInitStateType => state.comments;

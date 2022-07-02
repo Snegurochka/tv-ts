@@ -4,11 +4,11 @@
 const API_URL = 'https://api.themoviedb.org/3/';
 const API_KEY = process.env.REACT_APP_API_KEY;
 
-// For login and voting
-const REQUEST_TOKEN_URL = `${API_URL}authentication/token/new?api_key=${API_KEY}`;
-const LOGIN_URL = `${API_URL}authentication/token/validate_with_login?api_key=${API_KEY}`;
-const SESSION_ID_URL = `${API_URL}authentication/session/new?api_key=${API_KEY}`;
-const LOGOUT_URL = `${API_URL}authentication/session?api_key=${API_KEY}`;
+// TMDB API auth deprecated from 1.11
+// const REQUEST_TOKEN_URL = `${API_URL}authentication/token/new?api_key=${API_KEY}`;
+// const LOGIN_URL = `${API_URL}authentication/token/validate_with_login?api_key=${API_KEY}`;
+// const SESSION_ID_URL = `${API_URL}authentication/session/new?api_key=${API_KEY}`;
+// const LOGOUT_URL = `${API_URL}authentication/session?api_key=${API_KEY}`;
 
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/';
 // Sizes: w300, w780, w1280, original
@@ -22,8 +22,4 @@ export {
   IMAGE_BASE_URL,
   BACKDROP_SIZE,
   POSTER_SIZE,
-  REQUEST_TOKEN_URL,
-  LOGIN_URL,
-  LOGOUT_URL,
-  SESSION_ID_URL,
 };
