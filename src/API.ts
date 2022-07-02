@@ -7,7 +7,7 @@ import {
   LOGOUT_URL,
 } from './config';
 
-import { Credits, MoviesStateType, MoviType, Photos } from './types';
+import { Credits, MoviesStateType, MoviType, Photos } from './interfaces/types';
 import { ISessionId, IUserInfoAPIResponse } from './interfaces/APIInterfases';
 
 const defaultPOSTConfig = {

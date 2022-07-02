@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { IMAGE_BASE_URL, POSTER_SIZE } from "../../config";
-import { Backdrops } from "../../types";
+import { Backdrops } from "../../interfaces/types";
 
 import { Wrapper, Content, ContentGreed, BigImg, Image } from "./Gallery.styles";
 

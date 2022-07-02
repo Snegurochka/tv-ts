@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import API from "../API";
-import { isPersistedState } from "../helpers";
-import { MovieState } from "../types";
+import { isPersistedState } from "../utils/helpers";
+import { MovieState } from "../interfaces/types";
 
 export const useMovieFetch = (movieId: string) => {
     const [state, setState] = useState<MovieState>({} as MovieState);

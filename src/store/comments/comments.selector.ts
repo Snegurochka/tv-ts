@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { CommentType } from '../../types';
+import { CommentType } from '../../interfaces/types';
 import { AppStateType } from '../reducers';
 import { CommentsInitStateType } from './comments.reducer';
 

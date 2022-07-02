@@ -1,5 +1,5 @@
 import React from 'react';
-import { MovieState } from '../../types';
+import { MovieState } from '../../interfaces/types';
 import { Content, Wrapper, Text, Director, Score, RatingWrapper } from './MovieInfo.styles';
 import NoImage from '../../img/no_image.jpg';
 import { POSTER_SIZE, IMAGE_BASE_URL } from '../../config';
