@@ -31,6 +31,11 @@ const movie = (state = initState, action: IMovieAction) => {
             return {
                 ...state, actors: action.payload
             }
+        case MOVIE_ACTION_TYPES.FETCH_MOVIE_FAILED:
+            return {
+                ...state,
+                error: action.payload,
+            };
         default:
             return state;
     }
