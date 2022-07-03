@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCurrentUser } from "../../store/user/user.selector";
 
@@ -9,11 +9,9 @@ import AvatarImg from '../../img/avatar.png';
 import { SignOutStart } from "../../store/user/user.action";
 
 
-type PropsType = {}
-
-const UserBlock: React.FC<PropsType> = () => {
+const UserBlock: FC = () => {
     const user = useSelector(selectCurrentUser);
-    
+
     //const { sessionId, username, gravatar } = { ...auth };
     const dispatch = useDispatch();
 
