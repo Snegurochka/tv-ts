@@ -1,26 +1,36 @@
-import { all, call, put, takeLatest } from "typed-redux-saga";
+import { all, call, put, takeLatest, fork } from "typed-redux-saga";
 import API from "../../API";
 
-import { fetchMovieFailed, fetchMovieStartType, fetchMovieSuccess } from "./movie.action";
+import { fetchActorsSuccess, fetchDirectorsSuccess, fetchMovieFailed, fetchMovieStartType, fetchMovieSuccess } from "./movie.action";
 import { MOVIE_ACTION_TYPES } from "./movie.types";
+
+export function* fetchMovieInfo(id: string) {
+    const movie = yield* call(API.fetchMovie, id);
+    yield* put(fetchMovieSuccess(movie));
+}
+
+export function* fetchCrew(id: string) {
+    const credits = yield* call(API.fetchCredits, id);
+    //Get directors only
+    const directors = credits.crew.filter(
+        (member) => member.job === 'Director'
+    );
+    yield* put(fetchDirectorsSuccess(directors));
+    yield* put(fetchActorsSuccess(credits.cast));
+}
 
 export function* fetchMovieAsync({
     payload: id,
 }: fetchMovieStartType) {
     try {
-        const movie = yield* call(API.fetchMovie, id);
-        console.log(movie);
-
-
-        //yield* put(fetchMovieSuccess(movie));
+        yield* fork(fetchMovieInfo, id);
+        yield* fork(fetchCrew, id);
     } catch (error) {
         //const errorTxt = error.response.data.error;
 
         yield* put(fetchMovieFailed(error as Error));
     }
-
 }
-
 
 export function* onFetchMovie() {
     yield takeLatest(MOVIE_ACTION_TYPES.FETCH_MOVIE_START, fetchMovieAsync);

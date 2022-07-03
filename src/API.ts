@@ -3,7 +3,7 @@ import {
   API_KEY,
 } from './config';
 
-import { Credits, MoviesStateType, MoviType, Photos } from './interfaces/types';
+import { Credits, MoviesStateType, MovieType, Photos } from './interfaces/types';
 // TMDB API auth deprecated from 1.11
 //import { ISessionId, IUserInfoAPIResponse } from './interfaces/APIInterfases';
 
@@ -29,7 +29,7 @@ const API = {
       : `${API_URL}${type}/popular?api_key=${API_KEY}&language=en-US&page=${page}`;
     return await (await fetch(endpoint)).json();
   },
-  fetchMovie: async (movieId: string): Promise<MoviType> => {
+  fetchMovie: async (movieId: string): Promise<MovieType> => {
     const endpoint = `${API_URL}movie/${movieId}?api_key=${API_KEY}`;
     return await (await fetch(endpoint)).json();
   },

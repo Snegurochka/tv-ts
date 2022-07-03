@@ -1,8 +1,8 @@
-import { useMovieFetch } from '../../hooks/useMovieFetch';
 import { useParams } from 'react-router-dom';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { FC, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchCommentsStart } from '../../store/comments/comments.action';
+import { fetchMovieStart } from '../../store/movie/movie.action';
 
 // Components
 import Spinner from "../../components/Spinner/Spinner";
@@ -14,18 +14,23 @@ import Gallery from '../../components/Gallery/Gallery';
 import ActorsList from '../../components/ActorsList/ActorsList';
 import Comments from '../../components/Comments/Comments';
 import Layout from '../../components/Layout/Layout';
+import { selectMovie, selectMovieError, selectMovieIsLoading } from '../../store/movie/movie.selector';
 
 
-
-const Movie: React.FC = () => {
+const Movie: FC = () => {
     const { movieId } = useParams<{ movieId: string }>();
     const dispatch = useDispatch();
-    const { state: movie, loading, error } = useMovieFetch(movieId);
-    useEffect(() => {
-        dispatch(fetchCommentsStart())
-    }, [dispatch]);
+    //const { loading, error } = useMovieFetch(movieId);
+    const movie = useSelector(selectMovie);
+    const isLoading = useSelector(selectMovieIsLoading);
+    const error = useSelector(selectMovieError);
 
-    if (loading) return <Spinner />;
+    useEffect(() => {
+        dispatch(fetchMovieStart(movieId));
+        dispatch(fetchCommentsStart());
+    }, [dispatch, movieId]);
+
+    if (isLoading) return <Spinner />;
     if (error) return <Error />
 
     return (
