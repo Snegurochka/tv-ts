@@ -1,4 +1,4 @@
-import { ActorType, DirectorType, MovieType } from "../../interfaces/types";
+import { ActorType, Backdrops, DirectorType, MovieType } from "../../interfaces/types";
 import { IMovieAction } from "./movie.action";
 import { MOVIE_ACTION_TYPES } from "./movie.types";
 
@@ -6,6 +6,7 @@ const initState = {
     movie: {} as MovieType,
     actors: [] as ActorType[],
     directors: [] as DirectorType[],
+    photos: [] as Backdrops[],
     isLoading: false,
     error: null
 }
@@ -30,6 +31,10 @@ const movie = (state = initState, action: IMovieAction) => {
         case MOVIE_ACTION_TYPES.FETCH_ACTORS_SUCCESS:
             return {
                 ...state, actors: action.payload
+            }
+        case MOVIE_ACTION_TYPES.FETCH_PHOTOS_SUCCESS:
+            return {
+                ...state, photos: action.payload
             }
         case MOVIE_ACTION_TYPES.FETCH_MOVIE_FAILED:
             return {

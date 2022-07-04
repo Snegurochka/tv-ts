@@ -10,6 +10,11 @@ export const selectMovie = createSelector(
     (movie) => ({ ...movie.movie, actors: movie.actors, directors: movie.directors })
 );
 
+export const selectMoviePhotos = createSelector(
+    [selectMovieReducer],
+    (movie) => movie.photos
+);
+
 export const selectMovieIsLoading = createSelector(
     [selectMovieReducer],
     (movie) => movie.isLoading

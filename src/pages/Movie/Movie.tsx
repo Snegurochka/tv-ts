@@ -3,7 +3,7 @@ import { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCommentsStart } from '../../store/comments/comments.action';
 import { fetchMovieStart } from '../../store/movie/movie.action';
-import { selectMovie, selectMovieError, selectMovieIsLoading } from '../../store/movie/movie.selector';
+import { selectMovie, selectMovieError, selectMovieIsLoading, selectMoviePhotos } from '../../store/movie/movie.selector';
 
 // Components
 import Spinner from "../../components/Spinner/Spinner";
@@ -21,6 +21,7 @@ const Movie: FC = () => {
     const { movieId } = useParams<{ movieId: string }>();
     const dispatch = useDispatch();
     const movie = useSelector(selectMovie);
+    const photos = useSelector(selectMoviePhotos);
     const isLoading = useSelector(selectMovieIsLoading);
     const error = useSelector(selectMovieError);
 
@@ -42,7 +43,7 @@ const Movie: FC = () => {
 
                 {movie.runtime ? (<MovieInfoBar time={movie.runtime} buget={movie.budget} revenue={movie.revenue} />) : null}
 
-                {movie.backdrops ? (<Gallery header='Photos' photos={movie.backdrops} />) : null}
+                {photos ? (<Gallery header='Photos' photos={photos} />) : null}
 
                 {movie.actors ? (<ActorsList actors={movie.actors} />) : null}
                 <Comments />

@@ -1,7 +1,7 @@
 import { all, call, put, takeLatest, fork } from "typed-redux-saga";
 import API from "../../API";
 
-import { fetchActorsSuccess, fetchDirectorsSuccess, fetchMovieFailed, fetchMovieStartType, fetchMovieSuccess } from "./movie.action";
+import { fetchActorsSuccess, fetchDirectorsSuccess, fetchMovieFailed, fetchMovieStartType, fetchMovieSuccess, fetchPhotosSuccess } from "./movie.action";
 import { MOVIE_ACTION_TYPES } from "./movie.types";
 
 export function* fetchMovieInfo(id: string) {
@@ -19,12 +19,18 @@ export function* fetchCrew(id: string) {
     yield* put(fetchActorsSuccess(credits.cast));
 }
 
+export function* fetchPhotos(id: string) {
+    const photos = yield* call(API.fetchPhotos, id);
+    yield* put(fetchPhotosSuccess(photos.backdrops));
+}
+
 export function* fetchMovieAsync({
     payload: id,
 }: fetchMovieStartType) {
     try {
         yield* fork(fetchMovieInfo, id);
         yield* fork(fetchCrew, id);
+        yield* fork(fetchPhotos, id);
     } catch (error) {
         //const errorTxt = error.response.data.error;
 
