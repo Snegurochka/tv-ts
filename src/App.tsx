@@ -14,6 +14,7 @@ import NotFound from './pages/NotFound/NotFound';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import Authentication from './pages/Authentication/Authentication';
 import Catalog from './pages/Catalog/Catalog';
+import WatchList from './pages/WatchList/WatchList';
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
@@ -27,9 +28,9 @@ const App: React.FC = () => {
     <Route path={AppRoute.LOGIN} exact component={Authentication} />
     <PrivateRoute
       exact
-      path={AppRoute.LOGIN}
-      authorizationStatus={AuthorizationStatus.NoAuth}
-      render={() => <Authentication />}
+      path={AppRoute.WATCH_LIST}
+      authorizationStatus={AuthorizationStatus.Auth}
+      render={() => <WatchList />}
     >
     </PrivateRoute>
     <Route
