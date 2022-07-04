@@ -1,7 +1,6 @@
 import { User } from "firebase/auth";
-//import { push } from 'react-router-redux';
-//import { push } from 'connected-react-router';
 import { all, call, put, takeLatest } from "typed-redux-saga/macro";
+
 import { AdditionalUserInformation } from "../../interfaces/APIInterfases";
 import {
     createUserDocumentFromAuth,
@@ -41,7 +40,6 @@ export function* signInWithGoogle() {
     try {
         const { user } = yield* call(signInWithGooglePopup);
         yield* call(getSnapshotFromUserAuth, user);
-        //yield put(push('/'));
     } catch (error) {
         yield* put(signInFailed(error as Error));
     }
