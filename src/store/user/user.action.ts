@@ -8,11 +8,11 @@ export const setCurrentUser = (user: UserType) => ({
 
 export const checkUserSession = () => ({ type: USER_ACTION_TYPES.CHECK_USER_SESSION } as const);
 
-export const googleSignInStart = () => ({ type: USER_ACTION_TYPES.GOOGLE_SIGN_IN_START } as const);
+export const googleSignInStart = (history:any) => ({ type: USER_ACTION_TYPES.GOOGLE_SIGN_IN_START, payload: history } as const);
 
-export const emailSignInStart = (email: string, password: string) => ({
+export const emailSignInStart = (email: string, password: string, history:any) => ({
     type: USER_ACTION_TYPES.EMAIL_SIGN_IN_START,
-    payload: { email, password }
+    payload: { email, password, history }
 } as const);
 
 export const signInSuccess = (user: UserType & {id: string}) => ({

@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 // import { useHistory } from 'react-router-dom';
 // import { AppRoute } from '../../const';
 import { emailSignInStart, googleSignInStart } from '../../store/user/user.action';
@@ -22,29 +23,7 @@ const SignInForm: React.FC = () => {
     const isLoading = useSelector(isLoging);
 
     const dispatch = useDispatch();
-    //const history = useHistory();
-
-    const resetFormFields = () => {
-        setFormFields(defaultFormFields);
-    };
-
-    // const handleSubmitThemoviedb = async () => {
-    //     try {
-    //         const requestToken = await API.getRequestToken();
-    //         const sessionId = await API.authenticate(
-    //             requestToken,
-    //             email,
-    //             password
-    //         );
-    //         dispatch(setLogin({ sessionId: sessionId.session_id, email }));
-    //         const userInfo = await API.fetchUserInfo(sessionId.session_id);
-    //         dispatch(setGravatar(userInfo.avatar.gravatar.hash));
-    //         resetFormFields();
-    //         history.push(AppRoute.HOME);
-    //     } catch (error) {
-    //         //setError(true);
-    //     }
-    // }
+    const history = useHistory();
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
@@ -53,14 +32,12 @@ const SignInForm: React.FC = () => {
     };
 
     const logGoogleUser = async () => {
-        dispatch(googleSignInStart());
+        dispatch(googleSignInStart(history));
     };
 
     const handleSubmit = async () => {
         try {
-            dispatch(emailSignInStart(email, password));
-            resetFormFields();
-            //history.push(AppRoute.HOME);
+            dispatch(emailSignInStart(email, password, history));
         } catch (e) {
             console.log(e);
         }
@@ -85,10 +62,11 @@ const SignInForm: React.FC = () => {
                     value={password} />
                 <ButtonsContainer>
                     <Button text='Login' buttonType={BUTTON_TYPE_CLASSES.small} callback={handleSubmit} isLoading={isLoading} />
-                    <ButtonGoogle text='Sign in with Google' buttonType={BUTTON_TYPE_CLASSES.small} callback={logGoogleUser} />
+
                 </ButtonsContainer>
 
             </form>
+            <ButtonGoogle text='Sign in with Google' buttonType={BUTTON_TYPE_CLASSES.small} callback={logGoogleUser} />
         </Wrapper>
     )
 }

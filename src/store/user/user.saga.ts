@@ -1,5 +1,6 @@
 import { User } from "firebase/auth";
 import { all, call, put, takeLatest } from "typed-redux-saga/macro";
+import { AppRoute } from "../../const";
 
 import { AdditionalUserInformation } from "../../interfaces/APIInterfases";
 import {
@@ -36,17 +37,20 @@ export function* isUserAuthenticated() {
     }
 }
 
-export function* signInWithGoogle() {
+export function* signInWithGoogle(history:any) {
     try {
         const { user } = yield* call(signInWithGooglePopup);
+        console.log('ok1');
+        
         yield* call(getSnapshotFromUserAuth, user);
+        history.push(AppRoute.HOME);
     } catch (error) {
         yield* put(signInFailed(error as Error));
     }
 }
 
 export function* signInWithEmail({
-    payload: { email, password },
+    payload: { email, password, history },
 }: emailSignInStartType,
 ) {
     try {
@@ -54,6 +58,7 @@ export function* signInWithEmail({
         if (!userCredential) return;
         const { user } = userCredential;
         yield* call(getSnapshotFromUserAuth, user);
+        history.push(AppRoute.HOME);
     } catch (error) {
         yield* put(signInFailed(error as Error));
     }
