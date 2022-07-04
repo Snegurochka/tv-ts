@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, FormEvent, useState } from 'react';
 
-import Button from '../UI/Button/Button';
+import Button, { BUTTON_TYPE_CLASSES } from '../UI/Button/Button';
 import Input from '../UI/Input/Input';
 
 const signUpFields = {
@@ -33,7 +33,7 @@ const SignUpForm: FC = () => {
                 <Input label="Email address" name="email" value={email} onChange={changeHandler} />
                 <Input label="Password" name="password" value={password} type='password' onChange={changeHandler} />
 
-                <Button text='Sign Up' buttonType="small" callback={handleSubmit} isLoading={false} />
+                <Button text='Sign Up' buttonType={BUTTON_TYPE_CLASSES.small} callback={handleSubmit} isLoading={false} />
             </form>
         </section>
     )

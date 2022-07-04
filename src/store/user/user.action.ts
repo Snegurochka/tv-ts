@@ -1,4 +1,4 @@
-import { UserType } from "../../types";
+import { UserType } from "../../interfaces/types";
 import { USER_ACTION_TYPES } from "./user.types";
 
 export const setCurrentUser = (user: UserType) => ({
@@ -15,12 +15,12 @@ export const emailSignInStart = (email: string, password: string) => ({
     payload: { email, password }
 } as const);
 
-export const signInSuccess = (user: UserType) => ({
+export const signInSuccess = (user: UserType & {id: string}) => ({
     type: USER_ACTION_TYPES.SIGN_IN_SUCCESS,
     payload: user
 } as const);
 
-export const signInFailed = (error: string) => ({
+export const signInFailed = (error: Error) => ({
     type: USER_ACTION_TYPES.SIGN_IN_FAILED,
     payload: error
 } as const);
@@ -28,7 +28,7 @@ export const signInFailed = (error: string) => ({
 export const SignOutStart = () => ({ type: USER_ACTION_TYPES.SIGN_OUT_START } as const);
 export const SignOutSuccess = () => ({ type: USER_ACTION_TYPES.SIGN_OUT_SUCCESS } as const);
 
-export const signOutFailed = (error: string) => ({
+export const signOutFailed = (error: Error) => ({
     type: USER_ACTION_TYPES.SIGN_OUT_FAILED,
     payload: error
 } as const);

@@ -1,5 +1,4 @@
-import { takeLatest, all, call, put } from 'redux-saga/effects';
-import { CommentType } from '../../types';
+import { takeLatest, all, call, put } from 'typed-redux-saga';
 import { getCommentsByMovieFromAPI } from '../../utils/firebase.utils';
 import { fetchCommentsFailed, fetchCommentsSuccess } from './comments.action';
 import { COMMENTS_ACTION_TYPES } from './comments.types';
@@ -7,14 +6,13 @@ import { COMMENTS_ACTION_TYPES } from './comments.types';
 export function* fetchCommentsAsync() {
   const movieId = '453395';
     try {
-        const comments:CommentType[] = yield call(getCommentsByMovieFromAPI, movieId);
+        const comments = yield* call(getCommentsByMovieFromAPI, movieId);
         
-        yield put(fetchCommentsSuccess(comments));
+        yield* put(fetchCommentsSuccess(comments));
       } catch (error) {
         //const errorTxt = error.response.data.error;
-        console.log('Error loading');
-        
-        yield put(fetchCommentsFailed('error'));
+      
+        yield* put(fetchCommentsFailed(error as Error));
       }
 }
 

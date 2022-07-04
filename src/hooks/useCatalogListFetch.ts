@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 // APT
 import API from "../API";
 // Helpers
-import { isPersistedState } from "../helpers";
+import { isPersistedState } from "../utils/helpers";
 //Types
-import { MoviesStateType } from "../types";
+import { MoviesStateType } from "../interfaces/types";
 
 const initialState: MoviesStateType = {
     page: 0,

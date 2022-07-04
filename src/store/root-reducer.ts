@@ -1,11 +1,11 @@
 import { combineReducers } from "redux";
-import auth from './auth';
-import user from '../user/user.reducer';
-import comments from '../comments/comments.reducer';
+import user from './user/user.reducer';
+import movie from './movie/movie.reducer';
+import comments from './comments/comments.reducer';
 
 const reducer = combineReducers({
-    auth,
     user,
+    movie,
     comments
 });
 

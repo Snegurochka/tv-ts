@@ -1,4 +1,4 @@
-export type MoviType = {
+export type MovieType = {
     id: number,
     backdrop_path: string,
     poster_path: string,
@@ -25,11 +25,11 @@ export type ActorType = {
     profile_path: string,
 }
 
-export type MovieState = MoviType & { actors: ActorType[]; directors: DirectorType[]; };
+export type MovieState = MovieType & { actors: ActorType[]; directors: DirectorType[]; };
 
 export type MoviesStateType = {
     page: number,
-    results: Array<MoviType>,
+    results: Array<MovieType>,
     total_pages: number,
     total_results: number,
 }

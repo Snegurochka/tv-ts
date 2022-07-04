@@ -1,8 +1,9 @@
-import { useMovieFetch } from '../../hooks/useMovieFetch';
 import { useParams } from 'react-router-dom';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { FC, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchCommentsStart } from '../../store/comments/comments.action';
+import { fetchMovieStart } from '../../store/movie/movie.action';
+import { selectMovie, selectMovieError, selectMovieIsLoading, selectMoviePhotos } from '../../store/movie/movie.selector';
 
 // Components
 import Spinner from "../../components/Spinner/Spinner";
@@ -16,28 +17,33 @@ import Comments from '../../components/Comments/Comments';
 import Layout from '../../components/Layout/Layout';
 
 
-
-const Movie: React.FC = () => {
+const Movie: FC = () => {
     const { movieId } = useParams<{ movieId: string }>();
     const dispatch = useDispatch();
-    const { state: movie, loading, error } = useMovieFetch(movieId);
-    useEffect(() => {
-        dispatch(fetchCommentsStart())
-    }, [dispatch]);
+    const movie = useSelector(selectMovie);
+    const photos = useSelector(selectMoviePhotos);
+    const isLoading = useSelector(selectMovieIsLoading);
+    const error = useSelector(selectMovieError);
 
-    if (loading) return <Spinner />;
-    if (error) return <Error />
+    useEffect(() => {
+        dispatch(fetchMovieStart(movieId));
+        dispatch(fetchCommentsStart());
+    }, [dispatch, movieId]);
+
+    if (isLoading) return <Spinner />;
 
     return (
         <Layout>
             <>
                 <BreadCrumb movieTitle={movie.original_title} />
 
-                <MovieInfo movie={movie} />
+                {error ? <Error /> : null}
+
+                {movie ? <MovieInfo movie={movie} /> : null}
 
                 {movie.runtime ? (<MovieInfoBar time={movie.runtime} buget={movie.budget} revenue={movie.revenue} />) : null}
 
-                {movie.backdrops ? (<Gallery header='Photos' photos={movie.backdrops} />) : null}
+                {photos ? (<Gallery header='Photos' photos={photos} />) : null}
 
                 {movie.actors ? (<ActorsList actors={movie.actors} />) : null}
                 <Comments />

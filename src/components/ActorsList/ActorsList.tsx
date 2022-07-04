@@ -1,12 +1,12 @@
 import React from "react";
 import { IMAGE_BASE_URL, POSTER_SIZE } from "../../config";
-import { ActorType } from "../../types";
-import Actor from "../Actor/Actor";
-import Grid from '../Grid/Grid';
+import { ActorType } from "../../interfaces/types";
 import NoImage from '../../img/no_image.jpg';
 
 import { Wrapper } from "./ActorsList.styles";
 import Button from "../UI/Button/Button";
+import Actor from "../Actor/Actor";
+import Grid from '../Grid/Grid';
 
 
 type PropsType = {

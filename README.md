@@ -13,5 +13,9 @@ You can see in live: https://kinolist.netlify.app/
 - "styled-components" for layout,
 - Jest (Unit tests, Snapshot tests)
 
+# Libs and packages: 
+- reselect - for creating memorized selectors
+- typed-redux-saga - better TypeScript typing to Redux-saga
+
 # Preview
 !["React Movie App with TS"](http://web-esse.ru/wp-includes/assets/React_Movie_App1.jpg "React Movie App with TS")

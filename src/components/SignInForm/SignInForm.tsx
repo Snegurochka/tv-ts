@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { emailSignInStart, googleSignInStart } from '../../store/user/user.action';
 import { isLoginError, isLoging } from '../../store/user/user.selector';
 
-import Button from '../UI/Button/Button';
+import Button, { BUTTON_TYPE_CLASSES } from '../UI/Button/Button';
 import Input from '../UI/Input/Input';
 
 import { Wrapper, ButtonsContainer, ButtonGoogle } from './SignInForm.styles';
@@ -84,8 +84,8 @@ const SignInForm: React.FC = () => {
                     onChange={handleChange}
                     value={password} />
                 <ButtonsContainer>
-                    <Button text='Login' buttonType="small" callback={handleSubmit} isLoading={isLoading} />
-                    <ButtonGoogle text='Sign in with Google' buttonType="small" callback={logGoogleUser} />
+                    <Button text='Login' buttonType={BUTTON_TYPE_CLASSES.small} callback={handleSubmit} isLoading={isLoading} />
+                    <ButtonGoogle text='Sign in with Google' buttonType={BUTTON_TYPE_CLASSES.small} callback={logGoogleUser} />
                 </ButtonsContainer>
 
             </form>

@@ -10,7 +10,7 @@ import {
     signInWithEmailAndPassword,
     signOut,
 } from 'firebase/auth';
-import { CommentType, UserType } from '../types';
+import { CommentType, UserType } from '../interfaces/types';
 import { AdditionalUserInformation } from '../interfaces/APIInterfases';
 
 const firebaseConfig = {

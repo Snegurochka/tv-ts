@@ -2,7 +2,7 @@ import React from 'react';
 import { Wrapper } from "./Layout.styles";
 
 import Header from './Header/Header';
-import { GlobalStyle } from '../../GlobalStyle';
+import { GlobalStyle } from './GlobalStyle';
 
 interface PropsType {
     header?: string,

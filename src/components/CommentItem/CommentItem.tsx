@@ -1,5 +1,5 @@
 import React from 'react';
-import { CommentType } from '../../types';
+import { CommentType } from '../../interfaces/types';
 import { Wrapper, Title, Text } from "./CommentItem.styles";
 
 interface IProps {
