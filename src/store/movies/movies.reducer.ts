@@ -26,7 +26,13 @@ const movies = (state = initState, action: IMoviesAction) => {
             }
         case MOVIES_ACTION_TYPES.FETCH_MOVIES_SUCCESS:
             return {
-                ...state, ...action.payload, isLoading: false
+                ...state,
+                ...action.payload,
+                results:
+                    action.payload.page > 1
+                        ? [...state.results, ...action.payload.results]
+                        : [...action.payload.results],
+                isLoading: false
             }
         case MOVIES_ACTION_TYPES.FETCH_MOVIES_FAILED:
             return {

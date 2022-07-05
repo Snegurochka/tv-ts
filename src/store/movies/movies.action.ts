@@ -2,10 +2,10 @@ import { IMoviesAPI } from "../../interfaces/APIInterfases";
 import { MovieType } from "../../interfaces/types";
 import { MOVIES_ACTION_TYPES } from "./movies.types";
 
-export const fetchMoviesStart = (page = 1, searchTerm = "") =>
+export const fetchMoviesStart = (type:string, page = 1, searchTerm = "") =>
 ({
     type: MOVIES_ACTION_TYPES.FETCH_MOVIES_START,
-    payload: { page, searchTerm }
+    payload: { type, page, searchTerm }
 } as const);
 
 export const fetchMoviesSuccess = (movies: IMoviesAPI) => ({

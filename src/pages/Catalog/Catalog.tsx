@@ -18,7 +18,7 @@ import Layout from "../../components/Layout/Layout";
 const Catalog: React.FC = () => {
     const { category } = useParams<{ category: string }>();
 
-    const { state, loading, error, setSearchTerm, setIsLoadingMore } = useCatalogListFetch(category);
+    const { movies, page, totalPages, isLoading, error, setSearchTerm, setIsLoadingMore } = useCatalogListFetch(category);
 
     if (error) {
         return <Error />
@@ -28,7 +28,7 @@ const Catalog: React.FC = () => {
         <Layout>
             <SearchBar setSearchTerm={setSearchTerm} />
             <Grid header={category === 'movie' ? 'Movies' : 'TV Series'}>
-                {state.results.map((movie) => (
+                {movies.map((movie) => (
                     <Thumb
                         key={movie.id}
                         image={
@@ -40,8 +40,8 @@ const Catalog: React.FC = () => {
                         clickable={true} />
                 ))}
             </Grid>
-            {loading && <Spinner />}
-            {state.page < state.total_pages && !loading && (
+            {isLoading && <Spinner />}
+            {page < totalPages && !isLoading && (
                 <Button text='Load More' callback={() => setIsLoadingMore(true)} />
             )}
         </Layout>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import NoImage from '../../img/no_image.jpg';
 
@@ -16,29 +16,20 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 import Error from "../../components/Error/Error";
 import Button from "../../components/UI/Button/Button";
 import Layout from "../../components/Layout/Layout";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchMoviesStart } from "../../store/movies/movies.action";
-import { selectMovies, selectMoviesError, selectMoviesIsLoading, selectMoviesPage, selectMoviesTotalPages } from "../../store/movies/movies.selector";
 
 
 
 const Home: React.FC = () => {
-    const [searchTerm, setSearchTerm] = useState('');
-    // const { state, loading, error, searchTerm, setSearchTerm, setIsLoadingMore } = useCatalogListFetch('movie');
-    const dispatch = useDispatch();
-    const movies = useSelector(selectMovies);
-    const page = useSelector(selectMoviesPage);
-    const totalPages = useSelector(selectMoviesTotalPages);
-    const isLoading = useSelector(selectMoviesIsLoading);
-    const error = useSelector(selectMoviesError);
-
-    useEffect(() => {
-        dispatch(fetchMoviesStart());
-    }, [dispatch]);
-
-    const loadingMoreHandler = () => {
-
-    }
+    const {
+        movies,
+        page,
+        totalPages,
+        isLoading,
+        error,
+        searchTerm,
+        setSearchTerm,
+        setIsLoadingMore
+    } = useCatalogListFetch('movie');
 
     if (error) {
         return <Error />
@@ -71,7 +62,7 @@ const Home: React.FC = () => {
                 </Grid>
                 {isLoading && <Spinner />}
                 {page < totalPages && !isLoading && (
-                    <Button text='Load More' callback={loadingMoreHandler} />
+                    <Button text='Load More' callback={() => setIsLoadingMore(true)} />
                 )}
             </>
         </Layout>
