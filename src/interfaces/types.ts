@@ -27,13 +27,6 @@ export type ActorType = {
 
 export type MovieState = MovieType & { actors: ActorType[]; directors: DirectorType[]; };
 
-export type MoviesStateType = {
-    page: number,
-    results: Array<MovieType>,
-    total_pages: number,
-    total_results: number,
-}
-
 export type Credits = {
     id: number,
     cast: ActorType[],
@@ -41,13 +34,12 @@ export type Credits = {
 }
 
 export type Backdrops = {
-    file_path: string
-
+    file_path: string,
 }
 
 export type Photos = {
     id: number,
-    backdrops: Backdrops[]
+    backdrops: Backdrops[],
 }
 
 export type CommentType = {

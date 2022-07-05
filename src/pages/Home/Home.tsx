@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import NoImage from '../../img/no_image.jpg';
 
 import { BACKDROP_SIZE, IMAGE_BASE_URL } from '../../config';
+
+// Hook
+import { useCatalogListFetch } from '../../hooks/useCatalogListFetch';
 
 // Components
 import BigBanner from '../../components/BigBanner/BigBanner';
@@ -11,16 +14,31 @@ import Grid from '../../components/Grid/Grid';
 import Spinner from "../../components/Spinner/Spinner";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import Error from "../../components/Error/Error";
-
-// Hook
-import { useCatalogListFetch } from '../../hooks/useCatalogListFetch';
 import Button from "../../components/UI/Button/Button";
 import Layout from "../../components/Layout/Layout";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchMoviesStart } from "../../store/movies/movies.action";
+import { selectMovies, selectMoviesError, selectMoviesIsLoading, selectMoviesPage, selectMoviesTotalPages } from "../../store/movies/movies.selector";
 
 
 
 const Home: React.FC = () => {
-    const { state, loading, error, searchTerm, setSearchTerm, setIsLoadingMore } = useCatalogListFetch('movie');
+    const [searchTerm, setSearchTerm] = useState('');
+    // const { state, loading, error, searchTerm, setSearchTerm, setIsLoadingMore } = useCatalogListFetch('movie');
+    const dispatch = useDispatch();
+    const movies = useSelector(selectMovies);
+    const page = useSelector(selectMoviesPage);
+    const totalPages = useSelector(selectMoviesTotalPages);
+    const isLoading = useSelector(selectMoviesIsLoading);
+    const error = useSelector(selectMoviesError);
+
+    useEffect(() => {
+        dispatch(fetchMoviesStart());
+    }, [dispatch]);
+
+    const loadingMoreHandler = () => {
+
+    }
 
     if (error) {
         return <Error />
@@ -29,17 +47,17 @@ const Home: React.FC = () => {
     return (
         <Layout>
             <>
-                {!searchTerm && state.results[0]
+                {!searchTerm && movies[0]
                     ? <BigBanner
-                        image={`${IMAGE_BASE_URL}${BACKDROP_SIZE}${state.results[0].backdrop_path}`}
-                        title={state.results[0].original_title}
-                        text={state.results[0].overview}
+                        image={`${IMAGE_BASE_URL}${BACKDROP_SIZE}${movies[0].backdrop_path}`}
+                        title={movies[0].original_title}
+                        text={movies[0].overview}
                     />
                     : null
                 }
                 <SearchBar setSearchTerm={setSearchTerm} />
                 <Grid header={searchTerm ? 'Search result' : 'Popular Movies'}>
-                    {state.results.map((movie) => (
+                    {movies.map((movie) => (
                         <Thumb
                             key={movie.id}
                             image={
@@ -51,9 +69,9 @@ const Home: React.FC = () => {
                             clickable={true} />
                     ))}
                 </Grid>
-                {loading && <Spinner />}
-                {state.page < state.total_pages && !loading && (
-                    <Button text='Load More' callback={() => setIsLoadingMore(true)} />
+                {isLoading && <Spinner />}
+                {page < totalPages && !isLoading && (
+                    <Button text='Load More' callback={loadingMoreHandler} />
                 )}
             </>
         </Layout>

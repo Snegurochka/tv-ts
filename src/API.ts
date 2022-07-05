@@ -2,8 +2,9 @@ import {
   API_URL,
   API_KEY,
 } from './config';
+import { IMoviesAPI } from './interfaces/APIInterfases';
 
-import { Credits, MoviesStateType, MovieType, Photos } from './interfaces/types';
+import { Credits, MovieType, Photos } from './interfaces/types';
 // TMDB API auth deprecated from 1.11
 //import { ISessionId, IUserInfoAPIResponse } from './interfaces/APIInterfases';
 
@@ -23,7 +24,7 @@ import { Credits, MoviesStateType, MovieType, Photos } from './interfaces/types'
 // };
 
 const API = {
-  fetchMovies: async (type: string, searchTerm: string, page: number): Promise<MoviesStateType> => {
+  fetchMovies: async (type: string, searchTerm: string, page: number): Promise<IMoviesAPI> => {
     const endpoint = searchTerm
       ? `${API_URL}search/${type}?api_key=${API_KEY}&language=en-US&query=${searchTerm}&page=${page}`
       : `${API_URL}${type}/popular?api_key=${API_KEY}&language=en-US&page=${page}`;

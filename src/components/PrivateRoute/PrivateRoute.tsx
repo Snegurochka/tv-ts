@@ -1,20 +1,20 @@
 import { Redirect, Route, RouteProps } from "react-router";
-import {AppRoute, AuthorizationStatus} from '../../const';
+import { AppRoute } from '../../const';
 
 type PrivateRouteProps = RouteProps & {
-    render: () => JSX.Element;
-    authorizationStatus: AuthorizationStatus;
-  }
+  render: () => JSX.Element;
+  isAuth: boolean;
+}
 
 const PrivateRoute: React.FC<PrivateRouteProps> = (props) => {
-    const {exact, path, render, authorizationStatus} = props;
+  const { exact, path, render, isAuth } = props;
 
   return (
     <Route
       exact={exact}
       path={path}
       render={() => (
-        authorizationStatus === AuthorizationStatus.Auth
+        isAuth
           ? render()
           : <Redirect to={AppRoute.LOGIN} />
       )}

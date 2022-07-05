@@ -1,12 +1,14 @@
+/*
+*   Deprecated since 1.14
+*/
 import { useEffect, useState } from "react";
 // APT
 import API from "../API";
 // Helpers
 import { isPersistedState } from "../utils/helpers";
-//Types
-import { MoviesStateType } from "../interfaces/types";
 
-const initialState: MoviesStateType = {
+
+const initialState = {
     page: 0,
     results: [],
     total_pages: 0,
@@ -27,11 +29,11 @@ export const useCatalogListFetch = (type: string) => {
 
             const movies = await API.fetchMovies(type, searchTerm, page);
 
-            setState((prev) => ({
-                ...movies,
-                results:
-                    page > 1 ? [...prev.results, ...movies.results] : [...movies.results]
-            }));
+            // setState((prev) => ({
+            //     ...movies,
+            //     results:
+            //         page > 1 ? [...prev.results, ...movies.results] : [...movies.results]
+            // }));
         } catch (e) {
             setError(true);
         }
