@@ -1,3 +1,6 @@
+/*
+*   Deprecated since 1.14
+*/
 import { useCallback, useEffect, useState } from "react";
 import API from "../API";
 import { isPersistedState } from "../utils/helpers";

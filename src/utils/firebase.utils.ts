@@ -60,7 +60,6 @@ export const getCurrentUser = (): Promise<User | null> => {
         const unsubscribe = onAuthStateChanged(
             auth,
             (userAuth) => {
-                console.log(unsubscribe);
                 unsubscribe();
                 resolve(userAuth);
             },
@@ -101,10 +100,10 @@ export const createUserDocumentFromAuth = async (
 export const signInAuthUserWithEmailAndPassword = async (
     email: string,
     password: string
-  ) => {
+) => {
     if (!email || !password) return;
-  
+
     return await signInWithEmailAndPassword(auth, email, password);
-  };
-  
-  export const signOutUser = async () => await signOut(auth);
+};
+
+export const signOutUser = async () => await signOut(auth);
