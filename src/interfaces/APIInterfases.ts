@@ -4,6 +4,12 @@ export interface ISessionId {
     session_id: string
 }
 
+export interface IUserAPI {
+  createdAt: Date;
+  displayName: string;
+  email: string;
+}
+
 export interface AdditionalUserInformation {
   displayName?: string;
 };

@@ -14,6 +14,8 @@ import Error from "../../components/Error/Error";
 import Button from "../../components/UI/Button/Button";
 import Layout from "../../components/Layout/Layout";
 import MovieListItem from "../../components/MovieListItem/MovieListItem";
+import { useSelector } from "react-redux";
+import { selectCurrentUserId } from "../../store/user/user.selector";
 
 
 const Home: FC = () => {
@@ -27,6 +29,10 @@ const Home: FC = () => {
         setSearchTerm,
         setIsLoadingMore
     } = useCatalogListFetch('movie');
+
+    const user = useSelector(selectCurrentUserId);
+    console.log(user);
+
 
     if (error) {
         return <Error />
@@ -45,7 +51,7 @@ const Home: FC = () => {
                 }
                 <SearchBar setSearchTerm={setSearchTerm} />
                 <Grid header={searchTerm ? 'Search result' : 'Popular Movies'}>
-                    {movies.map((movie) => (<MovieListItem movie={movie} />))}
+                    {movies.map((movie) => (<MovieListItem movie={movie} userId={null} />))}
                 </Grid>
                 {isLoading && <Spinner />}
                 {page < totalPages && !isLoading && (

@@ -1,8 +1,9 @@
+import { UserType } from "../../interfaces/types";
 import { IUserAction } from "./user.action";
 import { USER_ACTION_TYPES } from "./user.types";
 
 const initState = {
-    currentUser: null,
+    currentUser: null as null | UserType,
     isLoading: false,
     error: null,
 }

@@ -8,10 +8,11 @@ import Thumb from '../Thumb/Thumb';
 import { Wrapper } from './MovieListItem.styles';
 
 type PropsType = {
-    movie: MovieType
+    movie: MovieType,
+    userId: string | null
 }
 
-const MovieListItem: FC<PropsType> = ({ movie }) => {
+const MovieListItem: FC<PropsType> = ({ movie, userId }) => {
     return (
         <Wrapper>
             <Thumb
@@ -23,7 +24,8 @@ const MovieListItem: FC<PropsType> = ({ movie }) => {
                 }
                 moveId={movie.id}
                 clickable={true} />
-            <FavoriteBtn id={movie.id} isFavorite={false} />
+            {userId ? <FavoriteBtn movieId={movie.id} isFavorite={false} userId={userId} /> : null}
+
         </Wrapper>
     )
 }
