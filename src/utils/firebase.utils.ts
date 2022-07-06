@@ -11,7 +11,7 @@ import {
     signOut,
 } from 'firebase/auth';
 import { CommentType, UserType } from '../interfaces/types';
-import { AdditionalUserInformation } from '../interfaces/APIInterfases';
+import { AdditionalUserInformation, IUserAPI } from '../interfaces/APIInterfases';
 
 const firebaseConfig = {
     apiKey: "AIzaSyBOcX8hqzda1h_vzEfvElYNlQvLiBjCS20",
@@ -71,7 +71,7 @@ export const getCurrentUser = (): Promise<User | null> => {
 export const createUserDocumentFromAuth = async (
     userAuth: User,
     additionalInformation = {} as AdditionalUserInformation
-): Promise<void | QueryDocumentSnapshot<UserType>> => {
+): Promise<void | QueryDocumentSnapshot<IUserAPI>> => {
     if (!userAuth) return;
 
     const userDocRef = doc(db, 'users', userAuth.uid);

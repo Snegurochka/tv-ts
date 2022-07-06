@@ -11,11 +11,12 @@ type PropsType = {
 
 const Gallery: React.FC<PropsType> = ({ header, photos }) => {
     const [active, setActive] = useState(0);
+    
     return (
         <Wrapper>
             <h1>{header}</h1>
             <Content>
-                {/* <BigImg data-testid="thumbnail" src={`${IMAGE_BASE_URL}${POSTER_SIZE}${photos[active].file_path}`} alt={`Photo ${header}`} />
+                <BigImg data-testid="thumbnail" src={`${IMAGE_BASE_URL}${POSTER_SIZE}${photos[active].file_path}`} alt={`Photo ${header}`} />
                 <ContentGreed>
                     {photos.map((photo, index) => (
                         <Image
@@ -30,7 +31,7 @@ const Gallery: React.FC<PropsType> = ({ header, photos }) => {
                             className={index === active ? "active" : ""}
                         />
                     ))}
-                </ContentGreed> */}
+                </ContentGreed>
 
             </Content>
         </Wrapper>

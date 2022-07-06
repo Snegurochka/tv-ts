@@ -9,6 +9,11 @@ export const selectCurrentUser = createSelector(
     (user) => user.currentUser
 );
 
+export const selectCurrentUserId = createSelector(
+    selectUserReducer,
+    (user) => (user.currentUser ? user.currentUser.id : null)
+);
+
 export const isLoginError = createSelector(
     selectUserReducer,
     (user) => user.error

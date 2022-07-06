@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import { Link } from "react-router-dom";
 import { Image } from "./Thumb.styles";
 
@@ -8,8 +8,8 @@ type ThumbProps = {
     clickable: boolean
 }
 
-const Thumb: React.FC<ThumbProps> = ({ image, moveId, clickable }) => (
-    <div>
+const Thumb: FC<ThumbProps> = ({ image, moveId, clickable }) => (
+    <>
         {clickable
             ? (
                 <Link to={`/${moveId}`}>
@@ -18,7 +18,7 @@ const Thumb: React.FC<ThumbProps> = ({ image, moveId, clickable }) => (
             )
             : <Image data-testid="thumbnail" src={image} alt='movie-thumb' />}
 
-    </div>
+    </>
 )
 
 export default Thumb;

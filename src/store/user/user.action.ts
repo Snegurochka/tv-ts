@@ -16,7 +16,7 @@ export const emailSignInStart = (email: string, password: string, history:Histor
     payload: { email, password, history }
 } as const);
 
-export const signInSuccess = (user: UserType & {id: string}) => ({
+export const signInSuccess = (user: UserType) => ({
     type: USER_ACTION_TYPES.SIGN_IN_SUCCESS,
     payload: user
 } as const);
