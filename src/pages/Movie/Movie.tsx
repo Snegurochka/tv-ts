@@ -43,7 +43,7 @@ const Movie: FC = () => {
 
                 {movie.runtime ? (<MovieInfoBar time={movie.runtime} buget={movie.budget} revenue={movie.revenue} />) : null}
 
-                {photos ? (<Gallery header='Photos' photos={photos} />) : null}
+                {photos.length > 0 ? (<Gallery header='Photos' photos={photos} />) : null}
 
                 {movie.actors ? (<ActorsList actors={movie.actors} />) : null}
                 <Comments />

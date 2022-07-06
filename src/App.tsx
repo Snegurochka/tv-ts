@@ -28,13 +28,13 @@ const App: React.FC = () => {
   return <Switch>
     <Route path={AppRoute.HOME} exact component={Home} />
     <Route path={AppRoute.LOGIN} exact component={Authentication} />
-    {/* <PrivateRoute
+    <PrivateRoute
       exact
       path={AppRoute.WATCH_LIST}
       isAuth={user ? true : false}
       render={() => <WatchList />}
     >
-    </PrivateRoute> */}
+    </PrivateRoute>
     <Route
       path={AppRoute.CATALOG}
       component={Catalog}
