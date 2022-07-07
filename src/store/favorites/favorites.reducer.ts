@@ -7,7 +7,7 @@ const initState = {
     error: null
 }
 
-export type FavoriteInitStateType = typeof initState;
+export type FavoritesInitStateType = typeof initState;
 
 const favorites = (state = initState, action: IFavoritesAction) => {
     switch (action.type) {
@@ -29,8 +29,8 @@ const favorites = (state = initState, action: IFavoritesAction) => {
             return {
                 ...state, movies:
                     state.movies
-                        ? [...state.movies, action.payload]
-                        : action.payload
+                        ? [...state.movies, action.payload.movieId]
+                        : action.payload.movieId
             }
         default:
             return state;
