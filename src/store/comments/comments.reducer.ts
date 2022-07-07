@@ -1,5 +1,6 @@
 import { CommentType } from "../../interfaces/types";
-import { ICommentsAction } from "../AC/ActionsInterfases";
+import { ICommentsAction } from "./comments.action";
+
 import { COMMENTS_ACTION_TYPES } from "./comments.types";
 
 const initState = {
