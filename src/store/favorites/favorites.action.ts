@@ -16,9 +16,16 @@ export const fetchFavoritesFailed = (error: Error) => ({
     payload: error
 } as const);
 
+export const addFavorite = (movieId: number, userId: string) => ({
+    type: FAVORITES_ACTION_TYPES.ADD_FAVORITE,
+    payload: { movieId, userId }
+} as const);
+
 export type fetchFavoritesStartType = ReturnType<typeof fetchFavoritesStart>;
+export type addFavoriteType = ReturnType<typeof addFavorite>;
 
 export type IFavoritesAction =
     | fetchFavoritesStartType
+    | addFavoriteType
     | ReturnType<typeof fetchFavoriteseSuccess>
     | ReturnType<typeof fetchFavoritesFailed>

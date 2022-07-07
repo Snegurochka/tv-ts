@@ -25,6 +25,13 @@ const favorites = (state = initState, action: IFavoritesAction) => {
                 ...state,
                 error: action.payload,
             };
+        case FAVORITES_ACTION_TYPES.ADD_FAVORITE:
+            return {
+                ...state, movies:
+                    state.movies
+                        ? [...state.movies, action.payload]
+                        : action.payload
+            }
         default:
             return state;
     }

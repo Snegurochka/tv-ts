@@ -1,8 +1,10 @@
 import { FC } from 'react';
+import { useDispatch } from 'react-redux';
 import { BACKDROP_SIZE, IMAGE_BASE_URL } from '../../config';
 import NoImage from '../../img/no_image.jpg';
 
 import { MovieType } from '../../interfaces/types';
+import { addFavorite } from '../../store/favorites/favorites.action';
 import FavoriteBtn from '../FavoriteBtn/FavoriteBtn';
 import Thumb from '../Thumb/Thumb';
 import { Wrapper } from './MovieListItem.styles';
@@ -13,6 +15,12 @@ type PropsType = {
 }
 
 const MovieListItem: FC<PropsType> = ({ movie, userId }) => {
+    const dispatch = useDispatch();
+    const setFavorite = () => {
+        if (!userId) return;
+        dispatch(addFavorite(movie.id, userId));
+    }
+
     return (
         <Wrapper>
             <Thumb
@@ -24,8 +32,7 @@ const MovieListItem: FC<PropsType> = ({ movie, userId }) => {
                 }
                 moveId={movie.id}
                 clickable={true} />
-            {userId ? <FavoriteBtn movieId={movie.id} isFavorite={false} userId={userId} /> : null}
-
+            {userId ? <FavoriteBtn isFavorite={false} setFavoriteHandler={setFavorite} /> : null}
         </Wrapper>
     )
 }
