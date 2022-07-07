@@ -1,6 +1,7 @@
 import { spawn } from 'typed-redux-saga';
 
 import { commentsSaga } from './comments/comments.saga';
+import { favoritesSaga } from './favorites/favorites.saga';
 import { movieSaga } from './movie/movie.saga';
 import { moviesSaga } from './movies/movies.saga';
 import { userSaga } from './user/user.saga';
@@ -17,6 +18,7 @@ import { userSaga } from './user/user.saga';
 export function* rootSaga() {
     yield spawn(userSaga);
     yield spawn(moviesSaga);
+    yield spawn(favoritesSaga);
     yield spawn(commentsSaga);
     yield spawn(movieSaga);
 }
