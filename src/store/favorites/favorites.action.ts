@@ -1,12 +1,12 @@
-import favorites from "./favorites.reducer";
+import { FavoriteMovieType } from "../../interfaces/types";
 import { FAVORITES_ACTION_TYPES } from "./favorites.types";
 
-export const fetchFavoritesStart = (customerId: string) => ({
+export const fetchFavoritesStart = (userId: string) => ({
     type: FAVORITES_ACTION_TYPES.FETCH_FAVORITES_START,
-    payload: customerId
+    payload: userId
 } as const);
 
-export const fetchFavoriteseSuccess = (favorites: number[]) => ({
+export const fetchFavoriteseSuccess = (favorites: FavoriteMovieType[]) => ({
     type: FAVORITES_ACTION_TYPES.FETCH_FAVORITES_SUCCESS,
     payload: favorites
 } as const);
@@ -16,9 +16,9 @@ export const fetchFavoritesFailed = (error: Error) => ({
     payload: error
 } as const);
 
-export const addFavorite = (movieId: number, userId: string) => ({
+export const addFavorite = (favorite: FavoriteMovieType) => ({
     type: FAVORITES_ACTION_TYPES.ADD_FAVORITE,
-    payload: { movieId, userId }
+    payload: favorite
 } as const);
 
 export type fetchFavoritesStartType = ReturnType<typeof fetchFavoritesStart>;

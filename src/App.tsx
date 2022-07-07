@@ -13,6 +13,7 @@ import NotFound from './pages/NotFound/NotFound';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 import { Spinner } from './components/Spinner/Spinner.styles';
+import { fetchFavoritesStart } from './store/favorites/favorites.action';
 
 const Home = lazy(() => import('./pages/Home/Home'));
 const Catalog = lazy(() => import('./pages/Catalog/Catalog'));
@@ -27,6 +28,11 @@ const App: FC = () => {
   useEffect(() => {
     dispatch(checkUserSession());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (!user) return;
+    dispatch(fetchFavoritesStart(user.id));
+  }, [user]);
 
   return <Suspense fallback={<Spinner />}>
     <Switch>

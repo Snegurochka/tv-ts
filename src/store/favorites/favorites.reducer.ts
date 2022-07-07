@@ -1,8 +1,9 @@
+import { FavoriteMovieType } from "../../interfaces/types";
 import { IFavoritesAction } from "./favorites.action";
 import { FAVORITES_ACTION_TYPES } from "./favorites.types";
 
 const initState = {
-    movies: [] as number[] | null,
+    movies: [] as FavoriteMovieType[] | null,
     isLoading: false,
     error: null
 }
@@ -29,8 +30,8 @@ const favorites = (state = initState, action: IFavoritesAction) => {
             return {
                 ...state, movies:
                     state.movies
-                        ? [...state.movies, action.payload.movieId]
-                        : action.payload.movieId
+                        ? [...state.movies, action.payload]
+                        : action.payload
             }
         default:
             return state;

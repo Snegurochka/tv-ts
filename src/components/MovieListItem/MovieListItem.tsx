@@ -5,7 +5,7 @@ import NoImage from '../../img/no_image.jpg';
 
 import { MovieType } from '../../interfaces/types';
 import { addFavorite } from '../../store/favorites/favorites.action';
-import { selectFavoritesMovies } from '../../store/favorites/favorites.selector';
+import { selectFavoritesMoviesIds } from '../../store/favorites/favorites.selector';
 import FavoriteBtn from '../FavoriteBtn/FavoriteBtn';
 import Thumb from '../Thumb/Thumb';
 import { Wrapper } from './MovieListItem.styles';
@@ -16,14 +16,18 @@ type PropsType = {
 }
 
 const MovieListItem: FC<PropsType> = ({ movie, userId }) => {
-    const favoritesList = useSelector(selectFavoritesMovies);
+    const favoritesIds = useSelector(selectFavoritesMoviesIds);
     const dispatch = useDispatch();
     const setFavorite = () => {
         if (!userId) return;
-        dispatch(addFavorite(movie.id, userId));
+        dispatch(addFavorite({
+            id: movie.id,
+            userId: userId,
+            backdrop_path: movie.backdrop_path
+        }));
     }
 
-    const isFavorite =  favoritesList?.includes(movie.id) || false;
+    const isFavorite = favoritesIds?.includes(movie.id) || false;
 
     return (
         <Wrapper>
