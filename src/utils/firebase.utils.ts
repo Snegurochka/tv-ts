@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, query, getDocs, QueryDocumentSnapshot, doc, getDoc, setDoc } from 'firebase/firestore';
+import { getFirestore, collection, query, getDocs, QueryDocumentSnapshot, doc, getDoc, setDoc, where } from 'firebase/firestore';
 import {
     getAuth,
     signInWithRedirect,
@@ -10,7 +10,7 @@ import {
     signInWithEmailAndPassword,
     signOut,
 } from 'firebase/auth';
-import { CommentType, UserType } from '../interfaces/types';
+import { CommentType, FavoriteMovieType, UserType } from '../interfaces/types';
 import { AdditionalUserInformation, IUserAPI } from '../interfaces/APIInterfases';
 
 const firebaseConfig = {
@@ -34,12 +34,6 @@ export const getCollectionAndDocuments = async (collectionName: string, params =
 
     const querySnapshot = await getDocs(q);
     return querySnapshot;
-};
-
-// Comments
-export const getCommentsByMovieFromAPI = async (id: string): Promise<CommentType[]> => {
-    const querySnapshot = await getCollectionAndDocuments('comments');
-    return querySnapshot.docs.map((doc) => doc.data() as CommentType);
 };
 
 // Auth
@@ -107,3 +101,19 @@ export const signInAuthUserWithEmailAndPassword = async (
 };
 
 export const signOutUser = async () => await signOut(auth);
+
+// Comments
+export const getCommentsByMovieFromAPI = async (id: string): Promise<CommentType[]> => {
+    const querySnapshot = await getCollectionAndDocuments('comments');
+    return querySnapshot.docs.map((doc) => doc.data() as CommentType);
+};
+
+// Favorites
+export const getFavoritesFromAPI = async (userId: string): Promise<FavoriteMovieType[]> => {
+    const collectionRef = collection(db, 'favorites');
+    const q = query(collectionRef, where('uid', '==', userId));
+
+    const querySnapshot = await getDocs(q);
+
+    return querySnapshot.docs.map((doc) => doc.data() as FavoriteMovieType);
+};

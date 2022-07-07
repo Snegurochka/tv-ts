@@ -54,3 +54,9 @@ export type UserType = {
     displayName: string,
     email: string,
 }
+
+export type FavoriteMovieType = {
+    id: number,
+    userId: string,
+    backdrop_path: string,
+}

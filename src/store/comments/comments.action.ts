@@ -9,3 +9,8 @@ export const fetchCommentsSuccess = (comments:CommentType[]) => ({
  } as const);
 
 export const fetchCommentsFailed = (error:Error) => ({type: COMMENTS_ACTION_TYPES.FETCH_COMMENTS_FAILED, payload: error} as const);
+
+export type ICommentsAction =
+    | ReturnType<typeof fetchCommentsStart>
+    | ReturnType<typeof fetchCommentsSuccess>
+    | ReturnType<typeof fetchCommentsFailed>

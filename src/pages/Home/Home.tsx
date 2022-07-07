@@ -30,9 +30,7 @@ const Home: FC = () => {
         setIsLoadingMore
     } = useCatalogListFetch('movie');
 
-    const user = useSelector(selectCurrentUserId);
-    console.log(user);
-
+    const userid = useSelector(selectCurrentUserId);
 
     if (error) {
         return <Error />
@@ -51,7 +49,7 @@ const Home: FC = () => {
                 }
                 <SearchBar setSearchTerm={setSearchTerm} />
                 <Grid header={searchTerm ? 'Search result' : 'Popular Movies'}>
-                    {movies.map((movie) => (<MovieListItem movie={movie} userId={null} />))}
+                    {movies.map((movie) => (<MovieListItem key={movie.id} movie={movie} userId={userid} />))}
                 </Grid>
                 {isLoading && <Spinner />}
                 {page < totalPages && !isLoading && (
